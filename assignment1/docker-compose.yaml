@@ -1,0 +1,10 @@
+version: '3.9'
+
+services: 
+  aspnetapp:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    volumes:
+      - volume1:/tmp
