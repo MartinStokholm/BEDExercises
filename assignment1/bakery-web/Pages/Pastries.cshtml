@@ -1,0 +1,16 @@
+﻿@page
+@model MyApp.Namespace.PastriesModel
+@{
+  ViewData["Title"] = "Pastries";
+}
+
+<h1>Pastries</h1>
+<ul>
+  @if(Model.Pastries != null) {
+    @foreach (var pastry in Model.Pastries)
+    {
+      <li>@Html.DisplayFor(p => pastry.Title)</li>
+      <img class="img-thumbnail w-25" src="@(pastry.ImageURL)" alt="" />
+    }
+  }
+</ul>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bakery-api", "bakery-api\bakery-api.csproj", "{4E835079-D09B-4DA7-A107-1DCF43045660}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bakery-data", "bakery-data\bakery-data.csproj", "{5FFB705D-852A-4D61-B1A7-B0DE37432FEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E835079-D09B-4DA7-A107-1DCF43045660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E835079-D09B-4DA7-A107-1DCF43045660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E835079-D09B-4DA7-A107-1DCF43045660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E835079-D09B-4DA7-A107-1DCF43045660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFB705D-852A-4D61-B1A7-B0DE37432FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFB705D-852A-4D61-B1A7-B0DE37432FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFB705D-852A-4D61-B1A7-B0DE37432FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFB705D-852A-4D61-B1A7-B0DE37432FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

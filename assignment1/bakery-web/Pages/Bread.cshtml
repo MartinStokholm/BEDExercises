@@ -1,0 +1,15 @@
+﻿@page
+@model MyApp.Namespace.BreadModel
+@{
+  ViewData["Title"] = "BakeryWeb";
+}
+<h1>Breads</h1>
+<ul>
+  @if(Model.Breads != null) {
+    @foreach (var pastry in Model.Breads)
+    {
+      <li>@Html.DisplayFor(p => pastry.Title)</li>
+      <img class="img-thumbnail w-25" src="@(pastry.ImageURL)" alt="" />
+    }
+  }
+</ul>
