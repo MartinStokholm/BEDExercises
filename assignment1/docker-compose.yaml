@@ -1,10 +1,15 @@
 version: '3.9'
 
 services: 
-  aspnetapp:
+  api:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.API
+    ports:
+      - "6000:80"
+    image: postgres
+  web:
+    build:
+      dockerfile: Dockerfile.WEB
     ports:
       - "5000:80"
-    volumes:
-      - volume1:/tmp
+    image: "bakery-web:${API_URL}"
