@@ -1,10 +1,15 @@
 version: '3.9'
 
 services: 
-  aspnetapp:
+  api:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.API
+    ports:
+      - "6000:80"
+  web:
+    build:
+      dockerfile: Dockerfile.WEB
     ports:
       - "5000:80"
-    volumes:
-      - volume1:/tmp
+    environment:
+      - API_URL: http://localhost:6000

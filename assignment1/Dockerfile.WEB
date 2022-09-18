@@ -1,15 +1,17 @@
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /source
+WORKDIR /
 
 # copy csproj and restore as distinct layers
 COPY bakery-web.sln .
 COPY bakery-web/*.csproj ./bakery-web/
+COPY bakery-data/bakery-data.csproj ./bakery-data/
 RUN dotnet restore
 
 # copy everything else and build app
 COPY bakery-web/. ./bakery-web/
-WORKDIR /source/bakery-web
+COPY bakery-data/. ./bakery-data/
+WORKDIR /bakery-web
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
