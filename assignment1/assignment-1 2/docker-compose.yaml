@@ -9,11 +9,9 @@ services:
       - "6000:80"
   web:
     image: martinstokholm23/bakery-web:latest
-  web:
     build:
       dockerfile: Dockerfile.WEB
     ports:
       - "5000:80"
     environment:
       - API_URL=http://api:80
-    image: "bakery-web:${API_URL}"
