@@ -1,0 +1,19 @@
+@page
+@model Lesson4.Pages.Contact.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+@if(Model.Input is null) {
+    <div class="alert alert-danger">
+        Contact not found
+    </div>
+} else {
+    <h3>@Model.Input.Email?</h3>
+    <ul>
+        <li>@Model.Input?.Email?</li>
+        <li>@Model.Input?.Name?</li>
+        <li>@Model.Input?.Phone?</li>
+    </ul>
+}
