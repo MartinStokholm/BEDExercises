@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "urseZYxHqWZHbrtWaDEY6SECMjldRwzWLKTsKvFiQHLtbr4oqarhPAw9u1jUZU62mha2eZrOJkdfFG33feymiw==",
+  "dgSpecHash": "Af8vwqDD5YpfhSa4SNCvnnMID9VTTBqet5PMLXr3cTdXfSByZS/MZ/jKuPTv0xooxS6z2Z2F3sWmL4owF7HP9w==",
   "success": true,
   "projectFilePath": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\msldk\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\msldk\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
+    "C:\\Users\\msldk\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
     "C:\\Users\\msldk\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\msldk\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\msldk\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
