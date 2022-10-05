@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RestAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<RestAPIContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("RestAPIContext") ?? throw new InvalidOperationException("Connection string 'RestAPIContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
