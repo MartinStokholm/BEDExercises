@@ -4,7 +4,7 @@ using RestAPI.Data;
 using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<RestAPIContext>(options =>
+builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RestAPIContext") ?? throw new InvalidOperationException("Connection string 'RestAPIContext' not found.")));
 
 // Add services to the container.

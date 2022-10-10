@@ -14,67 +14,14 @@ namespace RestAPI.Controllers
     [ApiController]
     public class ExpensesController : ControllerBase
     {
-        private readonly RestAPIContext _context;
+        private readonly DataContext _context;
 
-        public ExpensesController(RestAPIContext context)
+        public ExpensesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Expenses
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Expense>>> GetExpense()
-        {
-            return await _context.Expense.ToListAsync();
-        }
-
-        // GET: api/Expenses/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Expense>> GetExpense(long id)
-        {
-            var expense = await _context.Expense.FindAsync(id);
-
-            if (expense == null)
-            {
-                return NotFound();
-            }
-
-            return expense;
-        }
-
-        // PUT: api/Expenses/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutExpense(long id, Expense expense)
-        {
-            if (id != expense.ExpenseId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(expense).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ExpenseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Expenses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Expense>> PostExpense(Expense expense)
         {
@@ -82,27 +29,6 @@ namespace RestAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetExpense", new { id = expense.ExpenseId }, expense);
-        }
-
-        // DELETE: api/Expenses/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExpense(long id)
-        {
-            var expense = await _context.Expense.FindAsync(id);
-            if (expense == null)
-            {
-                return NotFound();
-            }
-
-            _context.Expense.Remove(expense);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ExpenseExists(long id)
-        {
-            return _context.Expense.Any(e => e.ExpenseId == id);
         }
     }
 }

@@ -14,37 +14,57 @@ namespace RestAPI.Controllers
     [ApiController]
     public class JobsController : ControllerBase
     {
-        private readonly RestAPIContext _context;
+        private readonly DataContext _context;
 
-        public JobsController(RestAPIContext context)
+        public JobsController(DataContext context)
         {
             _context = context;
         }
-
-        // GET: api/Jobs
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Job>>> GetJob()
+        
+        // POST: api/Jobs
+        /// <summary>
+        /// Create new job
+        /// </summary>
+        /// <param name="job"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<Job>> PostJob(Job job)
         {
-            return await _context.Job.ToListAsync();
-        }
+            _context.Job.Add(job);
+            await _context.SaveChangesAsync();
 
-        // GET: api/Jobs/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Job>> GetJob(long id)
+            return CreatedAtAction("GetJob", new { id = job.JobId }, job);
+        }
+        
+        // DELETE: api/Jobs/5
+        /// <summary>
+        /// Delete a job
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteJob(long id)
         {
             var job = await _context.Job.FindAsync(id);
-
             if (job == null)
             {
                 return NotFound();
             }
 
-            return job;
-        }
+            _context.Job.Remove(job);
+            await _context.SaveChangesAsync();
 
-        // PUT: api/Jobs/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+            return NoContent();
+        }
+        
+        // PATCH: api/Jobs/5
+        /// <summary>
+        /// Update StartDate, Days, Location and Comments for a job
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="job"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
         public async Task<IActionResult> PutJob(long id, Job job)
         {
             if (id != job.JobId)
@@ -73,31 +93,82 @@ namespace RestAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Jobs
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Job>> PostJob(Job job)
-        {
-            _context.Job.Add(job);
-            await _context.SaveChangesAsync();
+        /// <summary>
+        /// Add a model by ID to a job by ID
+        /// </summary>
+        /// <param name="modelID"></param>
+        /// <param name="jobID"></param>
+        /// <returns></returns>
+        //public async Task<IActionResult> AddModelToJob(long modelID, long jobID)
+        //{
+        //    var model = await _context.Model.FindAsync(modelID);
+        //    var job = await _context.Job.FindAsync(jobID);
+        //    if (model == null || job == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    // job.Model = model;
+        //    await _context.SaveChangesAsync();
+        //    return NoContent();
+        //}
+      
 
-            return CreatedAtAction("GetJob", new { id = job.JobId }, job);
+        /// <summary>
+        /// Delete a model from a job
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{model}")]
+        public async Task<IActionResult> DeleteModel(long id)
+        {
+            {
+                var model = await _context.Model.FindAsync(id);
+                if (model == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Model.Remove(model);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
         }
 
-        // DELETE: api/Jobs/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteJob(long id)
+        // GET: api/Jobs
+        /// <summary>
+        /// Get list of all jobs
+        /// Includes name of model that is on each job but no expenses
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Job>>> GetJob()
+        {
+            return await _context.Job.ToListAsync();
+        }
+
+        //public async Task<ActionResult<IEnumerable<Job>>> GetJobWithModel()
+        //{
+        //    return await _context.Job.Include(j => j.Models).ToListAsync();
+        //}
+
+        // GET: api/Jobs/2
+        /// <summary>
+        /// Get job by JobID that contains a list of all expenses from that job
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Job>> GetJob(long id)
         {
             var job = await _context.Job.FindAsync(id);
+
             if (job == null)
             {
                 return NotFound();
             }
 
-            _context.Job.Remove(job);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return job;
         }
 
         private bool JobExists(long id)

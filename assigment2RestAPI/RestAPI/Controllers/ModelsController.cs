@@ -14,37 +14,52 @@ namespace RestAPI.Controllers
     [ApiController]
     public class ModelsController : ControllerBase
     {
-        private readonly RestAPIContext _context;
+        private readonly DataContext _context;
 
-        public ModelsController(RestAPIContext context)
+        public ModelsController(DataContext context)
         {
             _context = context;
         }
-
-        // GET: api/Models
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Model>>> GetModel()
+        
+        // POST: api/Models
+        /// <summary>
+        /// Creates a new Model only base data no jobs or expenses
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<Model>> PostModel(Model model)
         {
-            return await _context.Model.ToListAsync();
-        }
+            _context.Model.Add(model);
+            await _context.SaveChangesAsync();
 
-        // GET: api/Models/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Model>> GetModel(long id)
+            return CreatedAtAction("GetModel", new { id = model.ModelId }, model);
+        }
+        
+        // DELETE: api/Models/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteModel(long id)
         {
             var model = await _context.Model.FindAsync(id);
-
             if (model == null)
             {
                 return NotFound();
             }
 
-            return model;
-        }
+            _context.Model.Remove(model);
+            await _context.SaveChangesAsync();
 
-        // PUT: api/Models/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+            return NoContent();
+        }
+        
+        // PATCH: api/Models/5
+        /// <summary>
+        /// Update a model with only base data no jobs or expenses
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
         public async Task<IActionResult> PutModel(long id, Model model)
         {
             if (id != model.ModelId)
@@ -72,32 +87,35 @@ namespace RestAPI.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Models
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Model>> PostModel(Model model)
+        
+        // GET: api/Models
+        /// <summary>
+        /// Get all models as a list
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Model>>> GetModel()
         {
-            _context.Model.Add(model);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetModel", new { id = model.ModelId }, model);
+            return await _context.Model.ToListAsync();
         }
 
-        // DELETE: api/Models/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteModel(long id)
+        // GET: api/Models/5
+        /// <summary>
+        /// Get a specific model based on modelID 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ModelID and the jobs and expenses related to that model</returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Model>> GetModel(long id)
         {
             var model = await _context.Model.FindAsync(id);
+
             if (model == null)
             {
                 return NotFound();
             }
 
-            _context.Model.Remove(model);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return model;
         }
 
         private bool ModelExists(long id)

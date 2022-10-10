@@ -7,9 +7,9 @@ using RestAPI.Models;
 
 namespace RestAPI.Data
 {
-    public class RestAPIContext : DbContext
+    public class DataContext : DbContext
     {
-        public RestAPIContext (DbContextOptions<RestAPIContext> options)
+        public DataContext (DbContextOptions<DataContext> options)
             : base(options)
         {
         }
