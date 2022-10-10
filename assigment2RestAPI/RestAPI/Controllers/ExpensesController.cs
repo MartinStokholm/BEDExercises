@@ -25,16 +25,17 @@ namespace RestAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Expense>> PostExpense(ExpenseDTO expenseDTO)
         {
-            Expense tempExpense = new Expense();
+            var tempExpense = new Expense();
             tempExpense.Adapt(expenseDTO);
             _context.Expenses.Add(tempExpense);
             await _context.SaveChangesAsync();
+            //return Ok();
 
             return CreatedAtAction("GetExpense", new { id = expenseDTO.Id }, expenseDTO);
         }
 
-        [HttpGet]
-        private async Task<ActionResult<Expense>> GetExpense(long id) 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Expense>> GetExpense(long id) 
         {
             var expenseItem = await _context.Expenses.FindAsync(id);
             

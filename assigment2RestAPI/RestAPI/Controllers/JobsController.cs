@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestAPI.DTO;
 using RestAPI.Models;
 
 namespace RestAPI.Controllers
@@ -27,12 +29,15 @@ namespace RestAPI.Controllers
         /// <param name="job"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Job>> PostJob(Job job)
+        public async Task<ActionResult<Job>> PostJob(JobDTO jobDTO)
         {
-            _context.Jobs.Add(job);
+            Job tempJob = new Job();
+            //tempJob.Adapt(jobDTO);
+            jobDTO.Adapt(tempJob);
+            _context.Jobs.Add(tempJob);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetJob", new { id = job.Id }, job);
+            return CreatedAtAction("GetJob", new { id = tempJob.Id }, jobDTO);
         }
         
         // DELETE: api/Jobs/5
@@ -55,6 +60,8 @@ namespace RestAPI.Controllers
 
             return NoContent();
         }
+
+
         
         // PATCH: api/Jobs/5
         /// <summary>
@@ -63,28 +70,51 @@ namespace RestAPI.Controllers
         /// <param name="id"></param>
         /// <param name="job"></param>
         /// <returns></returns>
+        //[HttpPatch("{id}")]
+        //public async Task<IActionResult> PutJob(long id, Job job)
+        //{
+        //    if (id != job.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _context.Entry(job).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!JobExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PutJob(long id, Job job)
-        {
-            if (id != job.Id)
-            {
-                return BadRequest();
-            }
+        public async Task<IActionResult> PutJob(long id, JobUpdateDTO job) {
+            
+            var tempJob = await _context.Jobs.FindAsync(id);
+            job.Adapt(tempJob);
 
-            _context.Entry(job).State = EntityState.Modified;
+            _context.Entry(tempJob).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!JobExists(id))
-                {
+            catch (DbUpdateConcurrencyException) {
+                if (!JobExists(id)) {
                     return NotFound();
                 }
-                else
-                {
+                else {
                     throw;
                 }
             }
@@ -110,7 +140,7 @@ namespace RestAPI.Controllers
         //    await _context.SaveChangesAsync();
         //    return NoContent();
         //}
-      
+
 
         /// <summary>
         /// Delete a model from a job

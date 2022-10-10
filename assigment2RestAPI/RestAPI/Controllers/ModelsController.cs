@@ -31,7 +31,7 @@ namespace RestAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Model>> PostModel(ModelDTO modelDTO)
         {
-            Model tempModel = new Model();
+            var tempModel = new Model();
             tempModel.Adapt(modelDTO);
             _context.Models.Add(tempModel);
             await _context.SaveChangesAsync();
