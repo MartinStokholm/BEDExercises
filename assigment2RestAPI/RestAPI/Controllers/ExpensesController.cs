@@ -33,8 +33,7 @@ namespace RestAPI.Controllers
             return CreatedAtAction("GetExpense", new { id = expenseDTO.Id }, expenseDTO);
         }
 
-        // GET: api/expense/id
-        [HttpGet("{id}")]
+        [HttpGet]
         private async Task<ActionResult<Expense>> GetExpense(long id) 
         {
             var expenseItem = await _context.Expenses.FindAsync(id);

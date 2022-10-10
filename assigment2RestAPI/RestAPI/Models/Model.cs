@@ -5,7 +5,7 @@ namespace RestAPI.Models
 {
     public class Model
     {
-        public long ModelId { get; set; }
+        public long Id { get; set; }
         [MaxLength(64)]
         public string? FirstName { get; set; }
         [MaxLength(32)]

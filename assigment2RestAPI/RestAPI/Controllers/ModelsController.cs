@@ -43,13 +43,13 @@ namespace RestAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteModel(long id)
         {
-            var model = await _context.Models.FindAsync(id);
-            if (model == null)
+            var modelItem = await _context.Models.FindAsync(id);
+            if (modelItem == null)
             {
                 return NotFound();
             }
 
-            _context.Models.Remove(model);
+            _context.Models.Remove(modelItem);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -63,14 +63,14 @@ namespace RestAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PutModel(long id, Model model)
+        public async Task<IActionResult> PutModel(long id, Model modelItem)
         {
-            if (id != model.ModelId)
+            if (id != modelItem.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(model).State = EntityState.Modified;
+            _context.Entry(modelItem).State = EntityState.Modified;
 
             try
             {
@@ -123,7 +123,7 @@ namespace RestAPI.Controllers
 
         private bool ModelExists(long id)
         {
-            return _context.Models.Any(e => e.ModelId == id);
+            return _context.Models.Any(e => e.Id == id);
         }
     }
 }

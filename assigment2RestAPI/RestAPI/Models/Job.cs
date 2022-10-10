@@ -4,7 +4,7 @@ namespace RestAPI.Models
 {
     public class Job
     {
-        public long JobId { get; set; }
+        public long Id { get; set; }
         [MaxLength(64)]
         public string? Customer { get; set; }
         public DateTimeOffset StartDate { get; set; }

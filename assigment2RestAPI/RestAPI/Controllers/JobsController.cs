@@ -32,7 +32,7 @@ namespace RestAPI.Controllers
             _context.Jobs.Add(job);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetJob", new { id = job.JobId }, job);
+            return CreatedAtAction("GetJob", new { id = job.Id }, job);
         }
         
         // DELETE: api/Jobs/5
@@ -66,7 +66,7 @@ namespace RestAPI.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> PutJob(long id, Job job)
         {
-            if (id != job.JobId)
+            if (id != job.Id)
             {
                 return BadRequest();
             }
@@ -172,7 +172,7 @@ namespace RestAPI.Controllers
 
         private bool JobExists(long id)
         {
-            return _context.Jobs.Any(e => e.JobId == id);
+            return _context.Jobs.Any(e => e.Id == id);
         }
     }
 }

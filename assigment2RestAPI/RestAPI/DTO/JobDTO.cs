@@ -4,7 +4,7 @@ namespace RestAPI.DTO
 {
     public class JobDTO
     {
-        public long JobId { get; set; }
+        public long Id { get; set; }
         [MaxLength(64)]
         public string? Customer { get; set; }
         public DateTimeOffset StartDate { get; set; }
