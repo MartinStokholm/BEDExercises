@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<DataContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("RestAPIContext") ?? throw new InvalidOperationException("Connection string 'RestAPIContext' not found.")));
 
+// Use in-memory database for quick dev and testing
 builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
 
 // Add services to the container.

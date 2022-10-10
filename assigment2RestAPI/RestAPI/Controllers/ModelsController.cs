@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestAPI.DTO;
 using RestAPI.Models;
 
 namespace RestAPI.Controllers
@@ -27,15 +29,17 @@ namespace RestAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Model>> PostModel(Model model)
+        public async Task<ActionResult<Model>> PostModel(ModelDTO modelDTO)
         {
-            _context.Models.Add(model);
+            Model tempModel = new Model();
+            tempModel.Adapt(modelDTO);
+            _context.Models.Add(tempModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetModel", new { id = model.ModelId }, model);
+            return CreatedAtAction("GetModel", new { id = modelDTO.Id }, modelDTO);
         }
         
-        // DELETE: api/Models/5
+        // DELETE: api/Models/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteModel(long id)
         {
@@ -107,14 +111,14 @@ namespace RestAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Model>> GetModel(long id)
         {
-            var model = await _context.Models.FindAsync(id);
+            var modelItem = await _context.Models.FindAsync(id);
 
-            if (model == null)
+            if (modelItem == null)
             {
                 return NotFound();
             }
 
-            return model;
+            return modelItem;
         }
 
         private bool ModelExists(long id)
