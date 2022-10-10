@@ -17,19 +17,34 @@ namespace RestAPI.Controllers
     {
         private readonly DataContext _context;
 
-        public ExpensesController(DbSet<ExpenseDTO> expenseDbcontext)
+        public ExpensesController(DataContext context)
         {
-            _context.Adapt(expenseDbcontext); 
+            _context = context;
         }
 
         // POST: api/Expenses
         [HttpPost]
-        public async Task<ActionResult<Expense>> PostExpense(Expense expense)
+        public async Task<ActionResult<Expense>> PostExpense(ExpenseDTO expenseDTO)
         {
-            _context.Expenses.Add(expense);
+            Expense tempExpense = new Expense();
+            tempExpense.Adapt(expenseDTO);
+            _context.Expenses.Add(tempExpense);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExpense", new { id = expense.ExpenseId }, expense);
+            return CreatedAtAction("GetExpense", new { id = expenseDTO.Id }, expenseDTO);
         }
+
+        // GET: 
+        [HttpGet]
+        private async Task<ActionResult<Expense>> GetExpense(long id) 
+        {
+            var expenseItem = await _context.Expenses.FindAsync(id);
+            if (expenseItem == null)
+            {
+                return NotFound();
+            }
+            return expenseItem;
+        }
+
     }
 }

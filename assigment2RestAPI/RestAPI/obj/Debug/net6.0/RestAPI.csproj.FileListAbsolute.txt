@@ -263,3 +263,4 @@ C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigmen
 C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\obj\Debug\net6.0\ref\RestAPI.dll
 C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Mapster.dll
 C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Mapster.Core.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll

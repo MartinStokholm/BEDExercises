@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.SignalR;
 using RestAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RestAPIContext") ?? throw new InvalidOperationException("Connection string 'RestAPIContext' not found.")));
+//builder.Services.AddDbContext<DataContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("RestAPIContext") ?? throw new InvalidOperationException("Connection string 'RestAPIContext' not found.")));
+
+builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
 
 // Add services to the container.
 builder.Services.AddSignalR();

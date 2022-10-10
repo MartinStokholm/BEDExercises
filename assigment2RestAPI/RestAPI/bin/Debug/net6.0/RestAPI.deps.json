@@ -9,6 +9,7 @@
       "RestAPI/1.0.0": {
         "dependencies": {
           "Mapster": "7.3.0",
+          "Microsoft.EntityFrameworkCore.InMemory": "6.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.9",
@@ -929,6 +930,17 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "6.0.9.0",
+            "fileVersion": "6.0.922.41505"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/6.0.9": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.9"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.41505"
           }
@@ -2531,6 +2543,13 @@
       "sha512": "sha512-F+1dYjaxMG181+seb2xK4uLU1UoTR0UZRcfYzSQFfVFwAyWtCp3uooNorWYE3BnJAHNEVJgsGmlfYAEGsrewqg==",
       "path": "microsoft.entityframeworkcore.design/6.0.9",
       "hashPath": "microsoft.entityframeworkcore.design.6.0.9.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/6.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uQWxbNXOSvvQWgcDRTIfP6xC6NvyH/B8TlhCumzrPOy681LOS9RAoMPTlClboE3NyK5ptfzZhkO2vRTki0lFFw==",
+      "path": "microsoft.entityframeworkcore.inmemory/6.0.9",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.6.0.9.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/6.0.9": {
       "type": "package",
