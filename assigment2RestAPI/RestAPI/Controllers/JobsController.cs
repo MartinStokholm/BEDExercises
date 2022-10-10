@@ -32,14 +32,38 @@ namespace RestAPI.Controllers
         public async Task<ActionResult<Job>> PostJob(JobDTO jobDTO)
         {
             Job tempJob = new Job();
-            //tempJob.Adapt(jobDTO);
             jobDTO.Adapt(tempJob);
             _context.Jobs.Add(tempJob);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetJob", new { id = tempJob.Id }, jobDTO);
         }
-        
+
+        [HttpPut]
+        public async Task<ActionResult> PostModelJob(long id, long modelId) {
+            var job = await _context.Jobs.FindAsync(id);
+            var model = await _context.Models.FindAsync(id);
+            if (job == null || model == null)
+                return NotFound();
+
+            job.Models.Add(model);
+
+            _context.Entry(job).State = EntityState.Modified;
+
+            try {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) {
+                if (!JobExists(id)) {
+                    return NotFound();
+                }
+                else {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
+
         // DELETE: api/Jobs/5
         /// <summary>
         /// Delete a job
@@ -104,6 +128,8 @@ namespace RestAPI.Controllers
             
             var tempJob = await _context.Jobs.FindAsync(id);
             job.Adapt(tempJob);
+            if (tempJob == null)
+                return NotFound();
 
             _context.Entry(tempJob).State = EntityState.Modified;
 
@@ -171,9 +197,19 @@ namespace RestAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Job>>> GetJob()
+        public async Task<ActionResult<IEnumerable<JobModelDTO>>> GetJob()
         {
-            return await _context.Jobs.ToListAsync();
+
+            var tempJobs = new List<JobModelDTO>();
+
+            var jobs = await _context.Jobs.Include(x => x.Models).ToListAsync();
+            foreach (var job in jobs) {
+                var tempJob = new JobModelDTO();
+                job.Adapt(tempJob);
+                tempJobs.Add((tempJob));
+            }
+            
+            return tempJobs;
         }
 
         //public async Task<ActionResult<IEnumerable<Job>>> GetJobWithModel()
@@ -190,7 +226,10 @@ namespace RestAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Job>> GetJob(long id)
         {
-            var job = await _context.Jobs.FindAsync(id);
+            var job = await _context.Jobs
+                .Include(x => x.Models)
+                .Include(x => x.Expenses)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (job == null)
             {
