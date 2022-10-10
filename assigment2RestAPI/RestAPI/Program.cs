@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RestAPI.Data;
 using Microsoft.AspNetCore.SignalR;
+using RestAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>

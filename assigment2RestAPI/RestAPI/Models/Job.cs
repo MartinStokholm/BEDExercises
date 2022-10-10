@@ -13,7 +13,7 @@ namespace RestAPI.Models
         public string? Location { get; set; }
         [MaxLength(2000)]
         public string? Comments { get; set; }
-        public List<Model>? Models { get; set; }
-        public List<Expense>? Expenses { get; set; }
+        public List<Model>? Models { get; set; } = new List<Model>();
+        public List<Expense>? Expenses { get; set; } = new List<Expense>();
     }
 }

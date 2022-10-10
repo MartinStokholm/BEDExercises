@@ -30,8 +30,8 @@ namespace RestAPI.Models
         public string? HairColor { get; set; }
         [MaxLength(1000)]
         public string? Comments { get; set; }
-        public List<Job>? Jobs { get; set; }
-        public List<Expense>? Expenses { get; set; }
+        public List<Job>? Jobs { get; set; } = new List<Job>();
+        public List<Expense>? Expenses { get; set; } = new List<Expense>();
     }
 
 }

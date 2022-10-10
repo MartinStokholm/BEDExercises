@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestAPI.Data;
 using RestAPI.Models;
 
 namespace RestAPI.Controllers
@@ -30,7 +29,7 @@ namespace RestAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Job>> PostJob(Job job)
         {
-            _context.Job.Add(job);
+            _context.Jobs.Add(job);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetJob", new { id = job.JobId }, job);
@@ -45,13 +44,13 @@ namespace RestAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJob(long id)
         {
-            var job = await _context.Job.FindAsync(id);
+            var job = await _context.Jobs.FindAsync(id);
             if (job == null)
             {
                 return NotFound();
             }
 
-            _context.Job.Remove(job);
+            _context.Jobs.Remove(job);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -122,13 +121,13 @@ namespace RestAPI.Controllers
         public async Task<IActionResult> DeleteModel(long id)
         {
             {
-                var model = await _context.Model.FindAsync(id);
+                var model = await _context.Models.FindAsync(id);
                 if (model == null)
                 {
                     return NotFound();
                 }
 
-                _context.Model.Remove(model);
+                _context.Models.Remove(model);
                 await _context.SaveChangesAsync();
 
                 return NoContent();
@@ -144,7 +143,7 @@ namespace RestAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Job>>> GetJob()
         {
-            return await _context.Job.ToListAsync();
+            return await _context.Jobs.ToListAsync();
         }
 
         //public async Task<ActionResult<IEnumerable<Job>>> GetJobWithModel()
@@ -161,7 +160,7 @@ namespace RestAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Job>> GetJob(long id)
         {
-            var job = await _context.Job.FindAsync(id);
+            var job = await _context.Jobs.FindAsync(id);
 
             if (job == null)
             {
@@ -173,7 +172,7 @@ namespace RestAPI.Controllers
 
         private bool JobExists(long id)
         {
-            return _context.Job.Any(e => e.JobId == id);
+            return _context.Jobs.Any(e => e.JobId == id);
         }
     }
 }

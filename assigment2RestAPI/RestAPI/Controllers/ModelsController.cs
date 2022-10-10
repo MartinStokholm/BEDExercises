@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestAPI.Data;
 using RestAPI.Models;
 
 namespace RestAPI.Controllers
@@ -30,7 +29,7 @@ namespace RestAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Model>> PostModel(Model model)
         {
-            _context.Model.Add(model);
+            _context.Models.Add(model);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetModel", new { id = model.ModelId }, model);
@@ -40,13 +39,13 @@ namespace RestAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteModel(long id)
         {
-            var model = await _context.Model.FindAsync(id);
+            var model = await _context.Models.FindAsync(id);
             if (model == null)
             {
                 return NotFound();
             }
 
-            _context.Model.Remove(model);
+            _context.Models.Remove(model);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -96,7 +95,7 @@ namespace RestAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Model>>> GetModel()
         {
-            return await _context.Model.ToListAsync();
+            return await _context.Models.ToListAsync();
         }
 
         // GET: api/Models/5
@@ -108,7 +107,7 @@ namespace RestAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Model>> GetModel(long id)
         {
-            var model = await _context.Model.FindAsync(id);
+            var model = await _context.Models.FindAsync(id);
 
             if (model == null)
             {
@@ -120,7 +119,7 @@ namespace RestAPI.Controllers
 
         private bool ModelExists(long id)
         {
-            return _context.Model.Any(e => e.ModelId == id);
+            return _context.Models.Any(e => e.ModelId == id);
         }
     }
 }
