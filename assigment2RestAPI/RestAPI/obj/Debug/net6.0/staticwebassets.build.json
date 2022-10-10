@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "m3iPKM7tm4DrbOcums1uUCLB/MKhjDDSg7XCVbyi0T8=",
-  "Source": "RestAPI",
-  "BasePath": "_content/RestAPI",
+  "Hash": "k3cCFctJEHAPf5G3UZPOz7cwHkpsdxgZfOcyKAYl++s=",
+  "Source": "ModellingManagementAPI",
+  "BasePath": "_content/ModellingManagementAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

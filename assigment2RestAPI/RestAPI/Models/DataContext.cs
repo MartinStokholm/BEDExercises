@@ -4,14 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace RestAPI.Models
+namespace ModellingManagementAPI.Models
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options)
-            : base(options)
-        {
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
         public DbSet<Expense> Expenses { get; set; } = default!;
 

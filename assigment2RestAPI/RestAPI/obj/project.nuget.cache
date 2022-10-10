@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ea8zXFYY8DMFUqaWVB7kJu2HMXkvJ6bxgAogkzZwMW3onLVFBo3E+/Wln+APiIizmm+ylvIJBvSDGJR3L6M5UA==",
+  "dgSpecHash": "LIW4sI0/Ok181KzKuqHmSVd4MBmeglVT0oKovUwJe/8RqjcQ+UWiGHwXt77zhSwgH5gSOkZCUjl8phgjFpc7RA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
+  "projectFilePath": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\ModellingManagementAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\msldk\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\msldk\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",

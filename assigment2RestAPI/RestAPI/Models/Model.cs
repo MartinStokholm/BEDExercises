@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RestAPI.Models
+namespace ModellingManagementAPI.Models
 {
     public class Model
     {

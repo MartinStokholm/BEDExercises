@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RestAPI.DTO
+namespace ModellingManagementAPI.Models
 {
-    public class ModelDTO
+    public class ModelBaseData
     {
         public long Id { get; set; }
         [MaxLength(64)]
@@ -32,4 +31,5 @@ namespace RestAPI.DTO
         [MaxLength(1000)]
         public string? Comments { get; set; }
     }
+
 }

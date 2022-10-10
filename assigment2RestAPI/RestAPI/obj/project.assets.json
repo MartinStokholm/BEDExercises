@@ -10153,9 +10153,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
-      "projectName": "RestAPI",
-      "projectPath": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
+      "projectUniqueName": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\ModellingManagementAPI.csproj",
+      "projectName": "ModellingManagementAPI",
+      "projectPath": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\ModellingManagementAPI.csproj",
       "packagesPath": "C:\\Users\\msldk\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\obj\\",
       "projectStyle": "PackageReference",

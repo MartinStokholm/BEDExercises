@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPI", "RestAPI\RestAPI.csproj", "{15C40EE1-EC5F-40EB-B073-6C92FE29A9CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModellingManagementAPI", "RestAPI\ModellingManagementAPI.csproj", "{15C40EE1-EC5F-40EB-B073-6C92FE29A9CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

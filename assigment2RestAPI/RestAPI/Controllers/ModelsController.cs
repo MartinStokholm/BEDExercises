@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestAPI.DTO;
-using RestAPI.Models;
+using ModellingManagementAPI.Models;
 
-namespace RestAPI.Controllers
+
+namespace ModellingManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,56 +21,44 @@ namespace RestAPI.Controllers
         {
             _context = context;
         }
-        
-        // POST: api/Models
-        /// <summary>
-        /// Creates a new Model only base data no jobs or expenses
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
+        // POST ModelBasedata
         [HttpPost]
-        public async Task<ActionResult<Model>> PostModel(ModelDTO modelDTO)
+        public async Task<ActionResult<Model>> PostModel(Model newModel)
         {
-            Model tempModel = new Model();
-            tempModel.Adapt(modelDTO);
-            _context.Models.Add(tempModel);
+            _context.Models.Add(newModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetModel", new { id = modelDTO.Id }, modelDTO);
+            return Ok(await _context.Models.ToListAsync());
         }
-        
-        // DELETE: api/Models/id
+
+        // DELETE Model
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteModel(long id)
+        public async Task<ActionResult<Model>> DeleteModel(long id)
         {
-            var modelItem = await _context.Models.FindAsync(id);
-            if (modelItem == null)
+            var model = await _context.Models.FindAsync(id);
+            if (model == null)
             {
                 return NotFound();
             }
 
-            _context.Models.Remove(modelItem);
+            _context.Models.Remove(model);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(await _context.Models.ToListAsync());
         }
-        
-        // PATCH: api/Models/5
-        /// <summary>
-        /// Update a model with only base data no jobs or expenses
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
+
+        // PATCH ModelBasedata
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PutModel(long id, Model modelItem)
+        public async Task<ActionResult<Model>> PatchModel(long id, ModelBaseData updatedModel)
         {
-            if (id != modelItem.Id)
+            if (id != updatedModel.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(modelItem).State = EntityState.Modified;
+            _context.Entry(updatedModel).State = EntityState.Modified;
 
             try
             {
@@ -88,39 +76,30 @@ namespace RestAPI.Controllers
                 }
             }
 
-            return NoContent();
-        }
-        
-        // GET: api/Models
-        /// <summary>
-        /// Get all models as a list
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Model>>> GetModel()
-        {
-            return await _context.Models.ToListAsync();
+            return Ok(await _context.Models.ToListAsync());
         }
 
-        // GET: api/Models/5
-        /// <summary>
-        /// Get a specific model based on modelID 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>ModelID and the jobs and expenses related to that model</returns>
+        // GET ModelBasedata
+        [HttpGet]
+        public async Task<ActionResult<ModelBaseData>> GetModels()
+        {
+            return Ok(await _context.Models.ToListAsync());
+        }
+
+        // GET {model.id} Model
         [HttpGet("{id}")]
         public async Task<ActionResult<Model>> GetModel(long id)
         {
-            var modelItem = await _context.Models.FindAsync(id);
+            var model = await _context.Models.FindAsync(id);
 
-            if (modelItem == null)
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return modelItem;
+            return Ok(model);
         }
-
+        
         private bool ModelExists(long id)
         {
             return _context.Models.Any(e => e.Id == id);

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.DTO;
-using RestAPI.Models;
+using ModellingManagementAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace RestAPI.Controllers
+namespace ModellingManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,30 +21,15 @@ namespace RestAPI.Controllers
             _context = context;
         }
 
-        // POST: api/expenses
+        // POST Expense
         [HttpPost]
-        public async Task<ActionResult<Expense>> PostExpense(ExpenseDTO expenseDTO)
+        public async Task<ActionResult<Expense>> PostExpense(Expense request)
         {
-            Expense tempExpense = new Expense();
-            tempExpense.Adapt(expenseDTO);
-            _context.Expenses.Add(tempExpense);
+            _context.Expenses.Add(request);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExpense", new { id = expenseDTO.Id }, expenseDTO);
-        }
-
-        [HttpGet]
-        private async Task<ActionResult<Expense>> GetExpense(long id) 
-        {
-            var expenseItem = await _context.Expenses.FindAsync(id);
-            
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-            
-            return expenseItem;
-        }
+            return Ok(await _context.Expenses.ToListAsync());
+        }        
 
     }
 }

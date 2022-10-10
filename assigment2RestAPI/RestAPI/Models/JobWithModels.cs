@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestAPI.DTO
+namespace ModellingManagementAPI.Models
 {
-    public class JobDTO
+    public class JobWithModels
     {
         public long Id { get; set; }
         [MaxLength(64)]
@@ -13,5 +13,6 @@ namespace RestAPI.DTO
         public string? Location { get; set; }
         [MaxLength(2000)]
         public string? Comments { get; set; }
+        public List<Model>? Models { get; set; } = new List<Model>();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestAPI.Models
+namespace ModellingManagementAPI.Models
 {
     public class Expense
     {

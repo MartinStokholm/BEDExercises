@@ -2,7 +2,7 @@
 
 namespace ModellingManagementAPI.Models
 {
-    public class Job
+    public class JobWithExpenses
     {
         public long Id { get; set; }
         [MaxLength(64)]
@@ -13,7 +13,6 @@ namespace ModellingManagementAPI.Models
         public string? Location { get; set; }
         [MaxLength(2000)]
         public string? Comments { get; set; }
-        public List<Model>? Models { get; set; } = new List<Model>();
         public List<Expense>? Expenses { get; set; } = new List<Expense>();
     }
 }
