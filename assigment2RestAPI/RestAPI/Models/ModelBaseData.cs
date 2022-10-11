@@ -5,7 +5,7 @@ namespace ModellingManagementAPI.Models
 {
     public class ModelBaseData
     {
-        public long Id { get; set; }
+        // public long Id { get; set; }
         [MaxLength(64)]
         public string? FirstName { get; set; }
         [MaxLength(32)]
