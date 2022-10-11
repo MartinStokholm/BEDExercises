@@ -23,13 +23,28 @@ namespace ModellingManagementAPI.Controllers
 
         // POST Expense
         [HttpPost]
-        public async Task<ActionResult<Expense>> PostExpense(Expense request)
+        public async Task<ActionResult<Expense>> PostExpense(Expense expenseCreate)
         {
-            _context.Expenses.Add(request);
+            // add the expense to the database and save changes
+            _context.Expenses.Add(expenseCreate);
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.Expenses.ToListAsync());
-        }        
+            // add expense to Model list of expenses
+            var dbModel = await _context.Models.FindAsync(expenseCreate.ModelId);
+            
+            if (dbModel != null) 
+            {
+                // add the expense to the model update and save changes
+                dbModel.Expenses.Add(expenseCreate);
+                _context.Models.Update(dbModel);
+                await _context.SaveChangesAsync();
+                
+                // return the expenses list 
+                return Ok(await _context.Expenses.ToListAsync());
+            }
 
+            return BadRequest("Could not find model");
+   
+        }        
     }
 }

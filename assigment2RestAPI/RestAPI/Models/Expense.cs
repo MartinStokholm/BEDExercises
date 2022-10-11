@@ -5,7 +5,11 @@ namespace ModellingManagementAPI.Models
     public class Expense
     {
         public long Id { get; set; }
+
+        [ForeignKey("Id")]
         public long ModelId { get; set; }
+
+        [ForeignKey("Id")]
         public long JobId { get; set; }
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }

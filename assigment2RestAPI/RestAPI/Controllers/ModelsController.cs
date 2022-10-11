@@ -65,7 +65,7 @@ namespace ModellingManagementAPI.Controllers
 
         // PUT ModelBasedata
         [HttpPut("{modelId}")]
-        public async Task<ActionResult<ModelBaseData>> PatchModel(long modelId, ModelBaseData modelRequest)
+        public async Task<ActionResult<ModelBaseData>> PutModel(long modelId, ModelBaseData modelRequest)
         {
             // get the model from the database
             var dbModel = await _context.Models.FindAsync(modelId);
@@ -74,6 +74,7 @@ namespace ModellingManagementAPI.Controllers
             // update the model in the database using mapster adapt
             var model = modelRequest.Adapt(dbModel);
             _context.Models.Update(model);
+            
             // save the changes
             await _context.SaveChangesAsync();
 

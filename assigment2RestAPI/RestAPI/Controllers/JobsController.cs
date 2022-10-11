@@ -24,22 +24,24 @@ namespace ModellingManagementAPI.Controllers
 
         // POST a Job
         [HttpPost]
-        public async Task<ActionResult<Job>> PostJob(Job request)
+        public async Task<ActionResult<Job>> PostJob(JobCreate jobCreate)
         {
-            _context.Jobs.Add(request);
+            // add the expense to the database and save changes
+            _context.Jobs.Add(jobCreate.Adapt<Job>());
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.Jobs.ToListAsync());
+            // return updated list of jobs
+            return Ok(await _context.Jobs.ToListAsync()); 
         }
 
         // DELETE a Job
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Job>> DeleteJob(long id)
+        [HttpDelete("{jobId}")]
+        public async Task<ActionResult<Job>> DeleteJob(long jobId)
         {
-            var job = await _context.Jobs.FindAsync(id);
+            var job = await _context.Jobs.FindAsync(jobId);
             if (job == null)
             {
-                return NotFound();
+                return NotFound("Could not find job");
             }
 
             _context.Jobs.Remove(job);
@@ -48,30 +50,27 @@ namespace ModellingManagementAPI.Controllers
             return Ok(await _context.Jobs.ToListAsync());
         }
 
-        // PATCH JobUpdate
-        [HttpPatch("{id}")]
-        public async Task<ActionResult<JobUpdate>> PatchJob(long id, JobUpdate updatedJob)
+        // PUT JobUpdate
+        [HttpPut("{jobId}")]
+        public async Task<ActionResult<JobUpdate>> PutJob(long jobId, JobUpdate jobUpdate)
         {
-            if (id != updatedJob.Id)
-            {
-                return BadRequest();
-            }
-            var dbJob = await _context.Jobs.FindAsync(id);
-            if (dbJob == null)
-            {
-                return NotFound();
-            }
+            // get the model from the database
+            var dbJob = await _context.Models.FindAsync(jobId);
+            if (dbJob == null) { return NotFound("Could not find Model"); }
 
-            dbJob.Adapt(updatedJob);
-
-            _context.Entry(dbJob).State = EntityState.Modified;
+            // update the model in the database using mapster adapt
+            var job = jobUpdate.Adapt(dbJob);
+            _context.Models.Update(job);
+            
+            // save the changes
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.Jobs.ToListAsync());
+            // return the updated job using mapster adapt
+            return Ok(job.Adapt<JobUpdate>());
         }
 
         // PUT {model.id} on Job
-        [HttpPut("{modelId} {jobId}")]
+        [HttpPut("{jobId}/model/{modelId} ")]
         public async Task<ActionResult<Job>> PutModelOnJob(long modelId, long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);
@@ -88,8 +87,9 @@ namespace ModellingManagementAPI.Controllers
                 return NotFound("Could not find model with id " + modelId);
             }
 
-            
             dbJob.Models.Add(dbModel);
+            dbModel.Jobs.Add(dbJob);
+
             await _context.SaveChangesAsync();
             
             return Ok(await _context.Jobs.ToListAsync());
@@ -97,7 +97,7 @@ namespace ModellingManagementAPI.Controllers
         }
 
         // DELETE {model.id} from Job
-        [HttpDelete("{modelId} {jobId}")]
+        [HttpDelete("{jobId}/model/{modelId} ")]
         public async Task<ActionResult<Job>> DeleteModelFromJob(long modelId, long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);
@@ -114,7 +114,6 @@ namespace ModellingManagementAPI.Controllers
                 return NotFound("Could not find model with id " + modelId);
             }
 
-
             dbJob.Models.Remove(dbModel);
             await _context.SaveChangesAsync();
 
@@ -126,11 +125,7 @@ namespace ModellingManagementAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<JobWithModels>> GetJobWithModels()
         {
-            var jobs = await _context.Jobs.ToListAsync();
-            
-            var jobWithModels = jobs.Adapt<JobWithModels>();
-            
-            return Ok(jobWithModels);
+            return Ok(await _context.Jobs.Include(j => j.Models).ToListAsync());
         }
 
         // GET {model.id} JobWithModels
@@ -169,9 +164,5 @@ namespace ModellingManagementAPI.Controllers
             return Ok(jobWithExpenses);
         }
 
-        private bool JobExists(long id)
-        {
-            return _context.Jobs.Any(e => e.Id == id);
-        }
     }
 }
