@@ -5,7 +5,6 @@ namespace RestAPI.DTO
 {
     public class ExpenseDTO
     {
-        public long Id { get; set; }
         public long ModelId { get; set; }
         public long JobId { get; set; }
         [Column(TypeName = "date")]

@@ -10147,23 +10147,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bjarke\\.nuget\\packages\\": {},
+    "C:\\Users\\Bjark\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bjarke\\source\\repos\\Semester4\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Bjark\\source\\repos\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
       "projectName": "RestAPI",
-      "projectPath": "C:\\Users\\Bjarke\\source\\repos\\Semester4\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
-      "packagesPath": "C:\\Users\\Bjarke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bjarke\\source\\repos\\Semester4\\BEDExercises\\assigment2RestAPI\\RestAPI\\obj\\",
+      "projectPath": "C:\\Users\\Bjark\\source\\repos\\BEDExercises\\assigment2RestAPI\\RestAPI\\RestAPI.csproj",
+      "packagesPath": "C:\\Users\\Bjark\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bjark\\source\\repos\\BEDExercises\\assigment2RestAPI\\RestAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bjarke\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bjark\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10172,7 +10172,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

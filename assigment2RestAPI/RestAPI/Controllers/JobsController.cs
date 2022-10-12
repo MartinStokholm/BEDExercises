@@ -21,13 +21,7 @@ namespace RestAPI.Controllers
         {
             _context = context;
         }
-        
-        // POST: api/Jobs
-        /// <summary>
-        /// Create new job
-        /// </summary>
-        /// <param name="job"></param>
-        /// <returns></returns>
+
         [HttpPost]
         public async Task<ActionResult<Job>> PostJob(JobDTO jobDTO)
         {
@@ -39,37 +33,36 @@ namespace RestAPI.Controllers
             return CreatedAtAction("GetJob", new { id = tempJob.Id }, jobDTO);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> PostModelJob(long id, long modelId) {
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> PostModelJob(long id, long modelId)
+        {
             var job = await _context.Jobs.FindAsync(id);
             var model = await _context.Models.FindAsync(id);
-            if (job == null || model == null)
+            if (job == null || model == null || job.Models == null)
                 return NotFound();
 
             job.Models.Add(model);
 
             _context.Entry(job).State = EntityState.Modified;
 
-            try {
+            try
+            {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException) {
-                if (!JobExists(id)) {
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!JobExists(id))
+                {
                     return NotFound();
                 }
-                else {
+                else
+                {
                     throw;
                 }
             }
             return NoContent();
         }
 
-        // DELETE: api/Jobs/5
-        /// <summary>
-        /// Delete a job
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJob(long id)
         {
@@ -86,46 +79,10 @@ namespace RestAPI.Controllers
         }
 
 
-        
-        // PATCH: api/Jobs/5
-        /// <summary>
-        /// Update StartDate, Days, Location and Comments for a job
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="job"></param>
-        /// <returns></returns>
-        //[HttpPatch("{id}")]
-        //public async Task<IActionResult> PutJob(long id, Job job)
-        //{
-        //    if (id != job.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(job).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!JobExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PutJob(long id, JobUpdateDTO job) {
-            
+        public async Task<IActionResult> PutJob(long id, JobUpdateDTO job)
+        {
+
             var tempJob = await _context.Jobs.FindAsync(id);
             job.Adapt(tempJob);
             if (tempJob == null)
@@ -133,14 +90,18 @@ namespace RestAPI.Controllers
 
             _context.Entry(tempJob).State = EntityState.Modified;
 
-            try {
+            try
+            {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException) {
-                if (!JobExists(id)) {
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!JobExists(id))
+                {
                     return NotFound();
                 }
-                else {
+                else
+                {
                     throw;
                 }
             }
@@ -148,31 +109,6 @@ namespace RestAPI.Controllers
             return NoContent();
         }
 
-        /// <summary>
-        /// Add a model by ID to a job by ID
-        /// </summary>
-        /// <param name="modelID"></param>
-        /// <param name="jobID"></param>
-        /// <returns></returns>
-        //public async Task<IActionResult> AddModelToJob(long modelID, long jobID)
-        //{
-        //    var model = await _context.Model.FindAsync(modelID);
-        //    var job = await _context.Job.FindAsync(jobID);
-        //    if (model == null || job == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    // job.Model = model;
-        //    await _context.SaveChangesAsync();
-        //    return NoContent();
-        //}
-
-
-        /// <summary>
-        /// Delete a model from a job
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{model}")]
         public async Task<IActionResult> DeleteModel(long id)
         {
@@ -190,12 +126,6 @@ namespace RestAPI.Controllers
             }
         }
 
-        // GET: api/Jobs
-        /// <summary>
-        /// Get list of all jobs
-        /// Includes name of model that is on each job but no expenses
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<JobModelDTO>>> GetJob()
         {
@@ -203,26 +133,16 @@ namespace RestAPI.Controllers
             var tempJobs = new List<JobModelDTO>();
 
             var jobs = await _context.Jobs.Include(x => x.Models).ToListAsync();
-            foreach (var job in jobs) {
+            foreach (var job in jobs)
+            {
                 var tempJob = new JobModelDTO();
                 job.Adapt(tempJob);
                 tempJobs.Add((tempJob));
             }
-            
+
             return tempJobs;
         }
 
-        //public async Task<ActionResult<IEnumerable<Job>>> GetJobWithModel()
-        //{
-        //    return await _context.Job.Include(j => j.Models).ToListAsync();
-        //}
-
-        // GET: api/Jobs/2
-        /// <summary>
-        /// Get job by JobID that contains a list of all expenses from that job
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Job>> GetJob(long id)
         {

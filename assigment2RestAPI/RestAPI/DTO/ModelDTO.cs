@@ -6,7 +6,6 @@ namespace RestAPI.DTO
 {
     public class ModelDTO
     {
-        public long Id { get; set; }
         [MaxLength(64)]
         public string? FirstName { get; set; }
         [MaxLength(32)]
