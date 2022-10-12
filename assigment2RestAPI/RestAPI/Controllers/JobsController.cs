@@ -74,18 +74,12 @@ namespace ModellingManagementAPI.Controllers
         public async Task<ActionResult<Job>> PutModelOnJob(long modelId, long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);
-            
-            if (dbJob == null)
-            {
-                return NotFound("Could not find job with id " + jobId);
-            }
+
+            if (dbJob == null) { return NotFound("Could not find Job"); }
             
             var dbModel = await _context.Models.FindAsync(modelId);
             
-            if (dbModel == null)
-            {
-                return NotFound("Could not find model with id " + modelId);
-            }
+            if (dbModel == null) { return NotFound("Could not find model with id " + modelId); }
 
             dbJob.Models.Add(dbModel);
             dbModel.Jobs.Add(dbJob);
@@ -152,7 +146,11 @@ namespace ModellingManagementAPI.Controllers
         [HttpGet("{jobId}")]
         public async Task<ActionResult<JobWithExpenses>> GetJobWithExpenses(long jobId)
         {
-            var dbJob = await _context.Jobs.FindAsync(jobId);
+            var dbJob = _context.Jobs
+                .Where<Job>(j => j.Id == jobId)
+                .FirstOrDefault<Job>();
+
+            _context.Entry(dbJob).Collection(j => j.Expenses).Load();
 
             if (dbJob == null)
             {

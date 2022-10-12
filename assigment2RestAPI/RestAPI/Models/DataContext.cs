@@ -14,8 +14,8 @@ namespace ModellingManagementAPI.Models
 
         public DbSet<Expense> Expenses { get; set; } = default!;
 
-        public DbSet<Job> Jobs { get; set; }
+        public DbSet<Job> Jobs { get; set; } = default!;
 
-        public DbSet<Model> Models { get; set; }
+        public DbSet<Model> Models { get; set; } = default!;
     }
 }
