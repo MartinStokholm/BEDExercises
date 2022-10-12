@@ -264,3 +264,12 @@ C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigmen
 C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\obj\Debug\net6.0\ModellingManagementAPI.pdb
 C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\obj\Debug\net6.0\ModellingManagementAPI.genruntimeconfig.cache
 C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\obj\Debug\net6.0\ref\ModellingManagementAPI.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.Owin.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\Owin.dll
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\libman.json
+C:\Users\msldk\Desktop\Uni\SoftwareTeknologi\4Semester\BED\BEDExercises\assigment2RestAPI\RestAPI\bin\Debug\net6.0\ModellingManagementAPI.staticwebassets.runtime.json

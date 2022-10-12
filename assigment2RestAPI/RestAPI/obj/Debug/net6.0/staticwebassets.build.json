@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "k3cCFctJEHAPf5G3UZPOz7cwHkpsdxgZfOcyKAYl++s=",
+  "Hash": "Wn3iy0+hoekaQ+QBHqVK7G+A5ZVDmT5fdfzJbavsAJk=",
   "Source": "ModellingManagementAPI",
   "BasePath": "_content/ModellingManagementAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "ModellingManagementAPI\\wwwroot",
+      "Source": "ModellingManagementAPI",
+      "ContentRoot": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\wwwroot\\",
+      "BasePath": "_content/ModellingManagementAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.js",
+      "SourceId": "ModellingManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\wwwroot\\",
+      "BasePath": "_content/ModellingManagementAPI",
+      "RelativePath": "lib/microsoft/signalr/dist/browser/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.js"
+    },
+    {
+      "Identity": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js",
+      "SourceId": "ModellingManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\RestAPI\\wwwroot\\",
+      "BasePath": "_content/ModellingManagementAPI",
+      "RelativePath": "lib/microsoft/signalr/dist/browser/signalr.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js"
+    }
+  ]
 }
