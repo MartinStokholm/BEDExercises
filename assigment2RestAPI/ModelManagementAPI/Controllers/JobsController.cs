@@ -25,14 +25,15 @@ namespace ModelManagementAPI.Controllers
 
         // POST a Job
         [HttpPost]
-        public async Task<ActionResult<Job>> PostJob(JobCreate jobCreate)
+        public async Task<ActionResult<JobCreated>> PostJob(JobCreate jobCreate)
         {
             // add the expense to the database and save changes
             _context.Jobs.Add(jobCreate.Adapt<Job>());
             await _context.SaveChangesAsync();
 
-            // return updated list of jobs
-            return Ok(await _context.Jobs.ToListAsync());
+            var dbJobCreated = await _context.Jobs.ToListAsync();
+
+            return Accepted(dbJobCreated.Adapt<List<JobCreated>>());
         }
 
         // DELETE a Job
@@ -72,7 +73,7 @@ namespace ModelManagementAPI.Controllers
 
         // PUT {model.id} on Job
         [HttpPut("{jobId}/AddModel/{modelId}")]
-        public async Task<ActionResult<JobWithModels>> PutModelOnJob(long modelId, long jobId)
+        public async Task<ActionResult<JobWithModels>> AddModelToJob(long modelId, long jobId)
         {
             var dbModel = await _context.Models.SingleAsync(m => m.Id == modelId);
             if (dbModel == null) { return NotFound("Could not find Model"); }
@@ -92,12 +93,12 @@ namespace ModelManagementAPI.Controllers
             dbJob.Models.Add(dbModel);
             await _context.SaveChangesAsync();
             
-            return Accepted(dbModel);
+            return Accepted(dbModel.Adapt<JobWithModels>());
         }
 
-        // DELETE {model.id} from Job
-        [HttpDelete("{jobId}/RemoveModel/{modelId}")]
-        public async Task<ActionResult<Job>> DeleteModelFromJob(long modelId, long jobId)
+        // PUT {model.id} from Job
+        [HttpPut("{jobId}/RemoveModel/{modelId}")]
+        public async Task<ActionResult<Job>> RemoveModelFromJob(long modelId, long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);
             
@@ -120,8 +121,7 @@ namespace ModelManagementAPI.Controllers
         }
 
         // GET JobWithModels
-        [HttpGet("WithModelNames/{modelId}")]
-        [HttpGet]
+        [HttpGet("WithModelNames/{modelId}")]        
         public async Task<ActionResult<JobWithModelNames>> GetJobWithModelNames()
         {
             List<JobWithModelNames> allJobsWithModelNames = new List<JobWithModelNames>();
@@ -165,7 +165,7 @@ namespace ModelManagementAPI.Controllers
         }
 
         // GET {job.id} JobWithExpenses
-        [HttpGet("/WithExpenses/{jobId}")]
+        [HttpGet("WithExpenses/{jobId}")]
         public async Task<ActionResult<JobWithExpenses>> GetJobWithExpenses(long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);

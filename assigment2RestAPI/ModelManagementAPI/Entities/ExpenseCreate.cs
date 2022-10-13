@@ -16,6 +16,6 @@ namespace ModelManagementAPI.Entities
         public string? Text { get; set; }
         [Column(TypeName = "decimal(9,2)")]
         [Microsoft.Build.Framework.Required]
-        public decimal Amount { get; set; }
+        public decimal amount { get; set; }
     }
 }

@@ -63,7 +63,7 @@ namespace ModelManagementAPI.Controllers
         }
 
         // PUT ModelBasedata
-        [HttpPut("{modelId}")]
+        [HttpPut("BaseData/{modelId}")]
         public async Task<ActionResult<ModelBaseData>> PutModel(long modelId, ModelBaseData modelBaseData)
         {
             // get the model from the database
@@ -83,15 +83,13 @@ namespace ModelManagementAPI.Controllers
         }
 
         // GET ModelBasedata
-        [HttpGet]
-        public async Task<ActionResult<ModelBaseData>> GetModels()
+        [HttpGet("BaseData")]
+        public async Task<ActionResult<List<ModelBaseData>>> GetModels()
         {
-            // get the models from the database
             var dbModel = await _context.Models.ToListAsync();
-            
-            // reurn modelBaseData using mapster adapt
-            var model = dbModel.Adapt<List<ModelBaseData>>();
-            return Ok(model);
+            if (dbModel == null) { return BadRequest("Could not find any models"); }
+
+            return Ok(dbModel.Adapt<List<ModelBaseData>>());
         }
 
         // GET {model.id} Model
