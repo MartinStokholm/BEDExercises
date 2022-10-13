@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sfTan2OwGB6RekHY71JfMR9nVAepI0xeVpHkHO0ocCA=",
+  "Hash": "10hLpXt6+w8JxScRUq6O6AERgVGwPrBCjgDzFjEqDOg=",
   "Source": "ModelManagementAPI",
   "BasePath": "_content/ModelManagementAPI",
   "Mode": "Default",
@@ -85,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\ModelManagementAPI\\wwwroot\\js\\notifyOfExpense.js",
+      "Identity": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\ModelManagementAPI\\wwwroot\\js\\expenseUpdate.js",
       "SourceId": "ModelManagementAPI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\ModelManagementAPI\\wwwroot\\",
       "BasePath": "_content/ModelManagementAPI",
-      "RelativePath": "js/notifyOfExpense.js",
+      "RelativePath": "js/expenseUpdate.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\notifyOfExpense.js"
+      "OriginalItemSpec": "wwwroot\\js\\expenseUpdate.js"
     },
     {
       "Identity": "C:\\Users\\msldk\\Desktop\\Uni\\SoftwareTeknologi\\4Semester\\BED\\BEDExercises\\assigment2RestAPI\\ModelManagementAPI\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",

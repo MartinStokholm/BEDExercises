@@ -4,12 +4,11 @@ using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ModelManagementAPI.Hubs
-
 {
-    [HubName("messageHub")]
-    public class MessageHub : Hub
+    [HubName("expenseHub")]
+    public class ExpenseHub : Hub
     {
-        public MessageHub()
+        public ExpenseHub()
         {
 
         }

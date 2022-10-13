@@ -13,6 +13,6 @@ namespace ModelManagementAPI.Entities
         public string? Location { get; set; }
         [MaxLength(2000)]
         public string? Comments { get; set; }
-        public List<ExpenseCreate>? Expenses { get; set; }
+        public List<ExpenseCreate> Expenses { get; set; } = new List<ExpenseCreate>();
     }
 }

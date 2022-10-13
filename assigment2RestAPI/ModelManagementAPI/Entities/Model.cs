@@ -30,9 +30,9 @@ namespace ModelManagementAPI.Entities
         public string? HairColor { get; set; }
         [MaxLength(1000)]
         public string? Comments { get; set; }
-        public List<JobUpdate> Jobs { get; set; } = new List<JobUpdate>();
+        public List<Job> Jobs { get; set; } = new List<Job>();
 
-        public List<ExpenseCreate> Expenses { get; set; } = new List<ExpenseCreate>();
+        public List<Expense> Expenses { get; set; } = new List<Expense>();
     }
 
 }

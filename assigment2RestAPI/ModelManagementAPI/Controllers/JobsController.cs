@@ -7,6 +7,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ModelManagementAPI.Entities;
+using System.Reflection.Metadata;
 
 
 namespace ModelManagementAPI.Controllers
@@ -52,7 +53,7 @@ namespace ModelManagementAPI.Controllers
 
         // PUT JobUpdate
         [HttpPut("{jobId}")]
-        public async Task<ActionResult<JobUpdate>> PutJob(long jobId, JobUpdate jobUpdate)
+        public async Task<ActionResult<Job>> PutJob(long jobId, JobUpdate jobUpdate)
         {
             // get the model from the database
             var dbJob = await _context.Jobs.FindAsync(jobId);
@@ -66,45 +67,50 @@ namespace ModelManagementAPI.Controllers
             await _context.SaveChangesAsync();
 
             // return the updated job using mapster adapt
-            return Ok(dbJob.Adapt<JobUpdate>());
+            return Ok(dbJob);
         }
 
         // PUT {model.id} on Job
-        [HttpPut("{jobId}/AddModel/{modelId} ")]
-        public async Task<ActionResult<Job>> PutModelOnJob(long modelId, long jobId)
+        [HttpPut("{jobId}/AddModel/{modelId}")]
+        public async Task<ActionResult<JobWithModels>> PutModelOnJob(long modelId, long jobId)
         {
-
             var dbModel = await _context.Models.SingleAsync(m => m.Id == modelId);
+            if (dbModel == null) { return NotFound("Could not find Model"); }
+
+            var dbJob = await _context.Jobs.SingleAsync(j => j.Id == jobId);
+            if (dbJob == null) { return NotFound("Could not find Job"); }
+            _context.Entry(dbJob)
+                .Collection(j => j.Models)
+                .Load();
+            
+            if (dbJob.Models.Contains(dbModel)) { return Conflict("Model already on Job"); }
 
             _context.Entry(dbModel)
                 .Collection(m => m.Jobs)
                 .Load();
-            
-            if (dbModel == null) { return NotFound("Could not find Model"); }
-            
-            var dbJob = await _context.Jobs.SingleAsync(j => j.Id == jobId);
-            if (dbJob == null) { return NotFound("Could not find Job"); }
 
-            if (dbJob.Models == null) { dbJob.Models = new List<Model>(); }
-            
             dbJob.Models.Add(dbModel);
             await _context.SaveChangesAsync();
             
-            return Accepted(dbJob);
+            return Accepted(dbModel);
         }
 
         // DELETE {model.id} from Job
-        [HttpDelete("{jobId}/RemoveModel/{modelId} ")]
+        [HttpDelete("{jobId}/RemoveModel/{modelId}")]
         public async Task<ActionResult<Job>> DeleteModelFromJob(long modelId, long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);
+            
             if (dbJob == null) { return NotFound("Could not find job with id " + jobId); }
+            
             _context.Entry(dbJob)
                 .Collection(j => j.Models)
                 .Load();
 
             var dbModel = await _context.Models.FindAsync(modelId);
             if (dbModel == null) { return NotFound("Could not find model with id " + modelId); }
+
+            if (!dbJob.Models.Contains(dbModel)) { return BadRequest("Model not on job"); }
 
             dbJob.Models.Remove(dbModel);
             await _context.SaveChangesAsync();
@@ -114,8 +120,9 @@ namespace ModelManagementAPI.Controllers
         }
 
         // GET JobWithModels
+        [HttpGet("WithModelNames/{modelId}")]
         [HttpGet]
-        public async Task<ActionResult<JobWithModelNames>> GetJobWithModels()
+        public async Task<ActionResult<JobWithModelNames>> GetJobWithModelNames()
         {
             List<JobWithModelNames> allJobsWithModelNames = new List<JobWithModelNames>();
 
@@ -140,29 +147,30 @@ namespace ModelManagementAPI.Controllers
         // GET {model.id} ModelOnJob
         // get all jobs related to a model by id
         [HttpGet("WithModel/{modelId}")]
-        public async Task<ActionResult<JobWithModels>> GetJobsWithModels(long modelId)
+        public async Task<ActionResult<List<Job>>> GetJobsWithModels(long modelId)
         {
             // get all jobs from db
             var dbJobs = await _context.Jobs.ToListAsync();
 
+            dbJobs.ForEach(async j => await _context.Entry(j)
+                .Collection(j => j.Models)
+                .LoadAsync());
+            
             // find jobs where model id matches model id for a job
             dbJobs = dbJobs
                 .Where(j => j.Models.Any(m => m.Id == modelId))
-                .ToList();
+                .ToList();  
             
-            // return as JobWithModels
-            return Ok(dbJobs.Adapt<JobWithModels>());
+            return Ok(dbJobs);
         }
 
         // GET {job.id} JobWithExpenses
-        // get job by id with all expenses related to that job
-        [HttpGet("{jobId}/Expenses")]
+        [HttpGet("/WithExpenses/{jobId}")]
         public async Task<ActionResult<JobWithExpenses>> GetJobWithExpenses(long jobId)
         {
             var dbJob = await _context.Jobs.FindAsync(jobId);
 
             if (dbJob == null) { return NotFound("Could not find job with id " + jobId); }
-
 
             _context.Entry(dbJob)
                 .Collection(j => j.Expenses)

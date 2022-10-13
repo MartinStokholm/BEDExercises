@@ -7,10 +7,8 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNet.SignalR;
 using ModelManagementAPI.Hubs;
 using ModelManagementAPI.Entities;
-
 
 namespace ModelManagementAPI.Controllers
 {
@@ -19,9 +17,9 @@ namespace ModelManagementAPI.Controllers
     public class ExpensesController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly Microsoft.AspNetCore.SignalR.IHubContext<MessageHub> _hubContext;
+        private readonly IHubContext<ExpenseHub> _hubContext;
 
-        public ExpensesController(DataContext context, Microsoft.AspNetCore.SignalR.IHubContext<MessageHub> hubContext)
+        public ExpensesController(DataContext context, IHubContext<ExpenseHub> hubContext)
         {
             _context = context;
             _hubContext = hubContext;
@@ -32,24 +30,20 @@ namespace ModelManagementAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<List<ExpenseCreate>>> PostExpense(ExpenseCreate expenseCreate)
         {
+            var dbModel = _context.Models.Find(expenseCreate.ModelId);
+            if (dbModel == null) { return NotFound("Model not found"); }
+            
+            _context.Entry(dbModel)
+           .Collection(m => m.Expenses)
+           .Load();
+            
             // add the expense to the database and save changes
             _context.Expenses.Add(expenseCreate.Adapt<Expense>());
             await _context.SaveChangesAsync();
 
-            // Find model names from model in db and add to list
-            var dbModelNames = from m in _context.Models
-                          select m.FirstName;
-            List<string> modelNames = dbModelNames.ToList();
+            await _hubContext.Clients.All.SendAsync("NewExpense", expenseCreate);
 
-            // Find customer names from job in db and add to list
-            var dbcustomerName = from j in _context.Jobs
-                                 where j.Id == expenseCreate.JobId
-                                 select j.Customer;
-            List<string> customerNames = dbcustomerName.ToList();
-
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage",expenseCreate, modelNames, customerNames);
-
-            return Accepted();
+            return Accepted(await _context.Expenses.ToListAsync());
 
         }        
     }

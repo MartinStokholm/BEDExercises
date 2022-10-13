@@ -4,7 +4,7 @@ namespace ModelManagementAPI.Entities
 {
     public class JobUpdate
     {
-        public long Id { get; set; }
+        //public long Id { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public int Days { get; set; }
         [MaxLength(128)]

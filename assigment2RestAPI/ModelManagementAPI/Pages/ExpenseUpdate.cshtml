@@ -1,0 +1,31 @@
+﻿@page 
+@model ExpenseUpdateModel
+@{
+    ViewData["Title"] = "ExpenseUpdate";
+}
+<style>
+    #expenseContainer 
+    {
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: darkblue;
+        background-color: grey;
+        color: azure;
+        width: 500px;
+        height: 250px;
+        overflow-y: auto;
+        text-align: left;
+    }
+    
+</style>
+<div class="text-center">
+    <h1 class="display-4">Expenses added will be shown below:</h1>
+    <hr/>
+    
+    <div class="container" id="expenseContainer">
+        <ul id="expensesList"></ul>
+    </div>
+    
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/expenseUpdate.js"></script>

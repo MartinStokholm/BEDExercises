@@ -6,7 +6,7 @@ namespace ModelManagementAPI.Entities
 {
     public class ExpenseCreate
     {
-        public long Id { get; set; }
+        //public long Id { get; set; }
         [Microsoft.Build.Framework.Required]
         public long ModelId { get; set; }
         [Microsoft.Build.Framework.Required]
