@@ -12,6 +12,6 @@ namespace ModelManagementAPI.Entities
         public string? Location { get; set; }
         [MaxLength(2000)]
         public string? Comments { get; set; }
-        public ICollection<Model> Models { get; set; } = new List<Model>();
+        public ICollection<ModelBaseData> Models { get; set; } = new List<ModelBaseData>();
     }
 }

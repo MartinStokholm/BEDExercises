@@ -4,7 +4,7 @@ namespace ModelManagementAPI.Entities
 {
     public class JobCreate
     {
-        //public long Id { get; set; }
+        [MaxLength(64)]
         public string Customer { get; set; } = "";
         public DateTimeOffset StartDate { get; set; }
         public int Days { get; set; }

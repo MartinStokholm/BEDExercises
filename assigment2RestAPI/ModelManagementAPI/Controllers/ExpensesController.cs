@@ -28,7 +28,7 @@ namespace ModelManagementAPI.Controllers
 
         // POST Expense
         [HttpPost]
-        public async Task<ActionResult<List<ExpenseCreate>>> PostExpense(ExpenseCreate expenseCreate)
+        public async Task<ActionResult<List<ExpenseCreated>>> PostExpense(ExpenseCreate expenseCreate)
         {
             var dbModel = _context.Models.Find(expenseCreate.ModelId);
             if (dbModel == null) { return NotFound("Model not found"); }
@@ -41,9 +41,11 @@ namespace ModelManagementAPI.Controllers
             _context.Expenses.Add(expenseCreate.Adapt<Expense>());
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("NewExpense", expenseCreate);
+            await _hubContext.Clients.All.SendAsync("expenseadded", expenseCreate);
 
-            return Accepted(await _context.Expenses.ToListAsync());
+            var dbExpenses= await _context.Expenses.ToListAsync();
+
+            return Accepted(dbExpenses.Adapt<List<ExpenseCreated>>());
 
         }        
     }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace ModelManagementAPI.Hubs
 {
-    [HubName("expenseHub")]
+    [HubName("expensehub")]
     public class ExpenseHub : Hub
     {
         public ExpenseHub()

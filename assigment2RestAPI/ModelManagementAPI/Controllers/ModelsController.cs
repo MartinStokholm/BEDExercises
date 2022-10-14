@@ -69,7 +69,7 @@ namespace ModelManagementAPI.Controllers
             // get the model from the database
             var dbModel = await _context.Models.FindAsync(modelId);
             if (dbModel == null) { return NotFound("Could not find Model"); }
-
+          
             // update the model in the database using mapster adapt
             var model = modelBaseData.Adapt(dbModel);
             _context.Models.Update(model);
@@ -88,6 +88,13 @@ namespace ModelManagementAPI.Controllers
         {
             var dbModel = await _context.Models.ToListAsync();
             if (dbModel == null) { return BadRequest("Could not find any models"); }
+
+            foreach (var model in dbModel)
+            {
+                _context.Entry(model)
+                    .Collection(m => m.Jobs)
+                    .Load();
+            }
 
             return Ok(dbModel.Adapt<List<ModelBaseData>>());
         }

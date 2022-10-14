@@ -31,9 +31,9 @@ namespace ModelManagementAPI.Controllers
             _context.Jobs.Add(jobCreate.Adapt<Job>());
             await _context.SaveChangesAsync();
 
-            var dbJobCreated = await _context.Jobs.ToListAsync();
+            var dbJobs = await _context.Jobs.ToListAsync();
 
-            return Accepted(dbJobCreated.Adapt<List<JobCreated>>());
+            return Accepted(dbJobs.Adapt<List<JobCreated>>());
         }
 
         // DELETE a Job
@@ -75,20 +75,21 @@ namespace ModelManagementAPI.Controllers
         [HttpPut("{jobId}/AddModel/{modelId}")]
         public async Task<ActionResult<JobWithModels>> AddModelToJob(long modelId, long jobId)
         {
-            var dbModel = await _context.Models.SingleAsync(m => m.Id == modelId);
+            var dbModel = await _context.Models.FindAsync(modelId);
             if (dbModel == null) { return NotFound("Could not find Model"); }
 
-            var dbJob = await _context.Jobs.SingleAsync(j => j.Id == jobId);
+            var dbJob = await _context.Jobs.FindAsync(jobId);
             if (dbJob == null) { return NotFound("Could not find Job"); }
+            
             _context.Entry(dbJob)
                 .Collection(j => j.Models)
                 .Load();
-            
-            if (dbJob.Models.Contains(dbModel)) { return Conflict("Model already on Job"); }
 
             _context.Entry(dbModel)
-                .Collection(m => m.Jobs)
-                .Load();
+             .Collection(m => m.Jobs)
+             .Load();
+
+            if (dbJob.Models.Contains(dbModel)) { return Conflict("Model already on Job"); }
 
             dbJob.Models.Add(dbModel);
             await _context.SaveChangesAsync();
@@ -147,7 +148,7 @@ namespace ModelManagementAPI.Controllers
         // GET {model.id} ModelOnJob
         // get all jobs related to a model by id
         [HttpGet("WithModel/{modelId}")]
-        public async Task<ActionResult<List<Job>>> GetJobsWithModels(long modelId)
+        public async Task<ActionResult<List<JobWithModels>>> GetJobsWithModels(long modelId)
         {
             // get all jobs from db
             var dbJobs = await _context.Jobs.ToListAsync();
@@ -156,12 +157,12 @@ namespace ModelManagementAPI.Controllers
                 .Collection(j => j.Models)
                 .LoadAsync());
             
-            // find jobs where model id matches model id for a job
+            
             dbJobs = dbJobs
                 .Where(j => j.Models.Any(m => m.Id == modelId))
-                .ToList();  
-            
-            return Ok(dbJobs);
+                .ToList();
+
+            return Ok(dbJobs.Adapt<List<JobWithModels>>());
         }
 
         // GET {job.id} JobWithExpenses
@@ -181,14 +182,14 @@ namespace ModelManagementAPI.Controllers
 
             // map the job to a jobWithExpenses and assign a new list of expenses to the jobWithExpenses list of expenses
             var jobWithExpenses = dbJob.Adapt<JobWithExpenses>();
-            jobWithExpenses.Expenses = new List<ExpenseCreate>();
+            jobWithExpenses.Expenses = new List<ExpenseCreated>();
 
             if (dbJob == null) { return NotFound("Could not find job with id " + jobId); }
 
             // add all expenses related to the job to the jobWithExpenses object
             foreach (var expense in dbJob.Expenses)
             {
-                jobWithExpenses.Expenses.Add(expense.Adapt<ExpenseCreate>());
+                jobWithExpenses.Expenses.Add(expense.Adapt<ExpenseCreated>());
             }
             
             return Ok(jobWithExpenses);
