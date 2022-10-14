@@ -2,9 +2,12 @@
 connection.on("expenseadded", function (expense) {
     
     console.log("New Expense Added");
-    var expenseString = JSON.stringify(expense);
+    var expenseObject = JSON.stringify(expense);
+    
     var expenseItem = document.createElement("li");
-    expenseItem.textContent = expenseString;
+    
+    expenseItem.textContent = expenseObject;
+
     document.getElementById("expensesList").appendChild(expenseItem);
     
 });
