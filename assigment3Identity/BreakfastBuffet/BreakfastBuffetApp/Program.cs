@@ -6,8 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -27,10 +29,10 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("ReceptionStaff",
+    options.AddPolicy("Reception",
         policyBuilder => policyBuilder.RequireClaim("ReceptionAccess")
     );
-    options.AddPolicy("WaiterStaff",
+    options.AddPolicy("Waiter",
         policyBuilder => policyBuilder.RequireClaim("WaiterAccess"));
 });
 
