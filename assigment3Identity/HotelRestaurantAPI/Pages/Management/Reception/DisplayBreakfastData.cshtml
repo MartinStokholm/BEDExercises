@@ -1,0 +1,40 @@
+﻿@page
+@model HotelRestaurantAPI.Pages.Management.Reception.DisplayBreakfastDataModel
+
+<p>
+    <h2> Had breakfast at @Model.DateNow</h2>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Room Number
+            </th>
+            <th>
+                Adults
+            </th>
+            <th>
+                Children
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CheckedIn) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adults)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Children)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
