@@ -1,4 +1,5 @@
 using BreakfastBuffetApp.Data;
+using BreakfastBuffetApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,9 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddRazorPages();
+
+// inject the controller/service class for use in the razor pages
+builder.Services.AddTransient<IBreakfastService, BreakfastService>();
 
 builder.Services.AddAuthorization(options =>
 {

@@ -1,0 +1,49 @@
+﻿@page
+@model BreakfastBuffetApp.Pages.ReceptionModel
+@{
+    ViewData["Title"] = "Breakfast expected guests";
+}
+<div class="row-cols-1">
+ 
+    <div class="col">
+        <h3>Add expected guests for breakfast</h3>
+        <br />
+        <div>
+            <form method="Post">
+                <h4>Date:</h4><input class="form-control" asp-for="Input.Date" />
+                <br />
+                <h4>Enter guest amount: </h4>
+                <label for="aamount" title="Adults "></label>
+                Adults:
+                <br />
+                <input id="aamount" type="number" asp-for="Input.Adults">
+                <br />
+                <label for="camount" title="Children "></label>
+                Children:
+                <br />
+                <input id="camount" type="number" asp-for="Input.Children">
+                <br />
+                <br />
+                <button id="reservationSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            </form>
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <div class="col">
+            <form method="Post" asp-page-handler="Redirect">
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Go to breakfast history</button>
+            </form>
+        </div>
+        
+        @if (Model.ExpectedGuestsMessage != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <h2>
+                    @Model.ExpectedGuestsMessage
+                </h2>
+            </div>
+        }
+    </div>
+
+</div>
