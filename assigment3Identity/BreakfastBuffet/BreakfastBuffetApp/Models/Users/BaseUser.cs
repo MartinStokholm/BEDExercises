@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace BreakfastBuffetApp.Models.Staff;
+namespace BreakfastBuffetApp.Models.Users;
 
 public class BaseUser : IdentityUser
 {

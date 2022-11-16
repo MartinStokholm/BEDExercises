@@ -1,5 +1,5 @@
 ﻿using BreakfastBuffetApp.Models;
-using BreakfastBuffetApp.Models.Staff;
+using BreakfastBuffetApp.Models.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
