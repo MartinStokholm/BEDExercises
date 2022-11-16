@@ -2,7 +2,6 @@
 @model BreakfastBuffetApp.Pages.Kitchen.KitchenReportModel
 @{
 }
-<h1>KitchenPage</h1>
 
 <form method="post">
     <div class="form-group">
@@ -14,6 +13,7 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+
 <table>
     <thead>
         <tr>
@@ -22,15 +22,15 @@
     </thead>
     <tbody>
         <tr>
-            <td>Expected adults:</td>
+            <td>Adults:</td>
             <td>@Html.DisplayFor(x => x._adultsExpected)</td>
         </tr>
         <tr>
-            <td>Expected children:</td>
+            <td>Children:</td>
             <td>@Html.DisplayFor(x => x._childrenExpected)</td>
         </tr>
         <tr>
-            <td>Total of expected:</td>
+            <td>Total:</td>
             <td>@Html.DisplayFor(x => x._totalExpected)</td>
         </tr>
     </tbody>
@@ -44,15 +44,16 @@
     </thead>
     <tbody>
         <tr>
-            <td>Checked in adults:</td>
+            <td>Adults:</td>
             <td>@Html.DisplayFor(x => x._adultsCheckedIn)</td>
         </tr>
         <tr>
-            <td>Checked in children:</td>
+            <td>Children:</td>
             <td>@Html.DisplayFor(x => x._childrenCheckedIn)</td>
         </tr>
     </tbody>
 </table>
+<img src="https://thumbs.dreamstime.com/b/breakfast-buffet-full-continental-english-coffee-orange-juice-salad-croissant-fruit-77238300.jpg" />
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/kitchen.js"></script>
