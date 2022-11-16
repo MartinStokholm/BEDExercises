@@ -24,7 +24,7 @@ namespace BreakfastBuffetApp.Pages
         {
             [Required]
             [DataType(DataType.Date)]
-            public DateTime Date { get; set; } = new DateTime(2022, 11, 14);
+            public DateTime Date { get; set; } = new DateTime();
 
             public int Adults { get; set; } = 0;
             public int Children { get; set; } = 0;
