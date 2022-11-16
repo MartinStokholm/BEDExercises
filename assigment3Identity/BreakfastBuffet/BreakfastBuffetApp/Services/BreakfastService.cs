@@ -9,15 +9,15 @@ namespace BreakfastBuffetApp.Services
         public async Task<bool> AddExpected(ApplicationDbContext context, int day, int month, int adults, int children)
         {
             var dbKitchenReports = await context.KitchenReports
-                .Include(b => b.Expected)
-                .FirstOrDefaultAsync(b => b.Day == day && b.Month == month);
+                .Include(k => k.Expected)
+                .FirstOrDefaultAsync(k => k.Day == day && k.Month == month);
             
             if (dbKitchenReports == null)
             {
                 List<KitchenReport> kitchenReport = new();
                 for (int i = day; i < day + 7; i++)
                 {
-                    var kp = new KitchenReport() { Day = i, Month = 11 };
+                    var kp = new KitchenReport() { Day = i, Month = month };
                     kitchenReport.Add(kp);
                 }
 

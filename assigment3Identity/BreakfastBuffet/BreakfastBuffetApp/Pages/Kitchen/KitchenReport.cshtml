@@ -7,10 +7,12 @@
     <div class="form-group">
         <label asp-for="Input.Date"></label>
         <input class="form-control" type="date" data-val="true" asp-for="Input.Date" />
+        
         <span asp-validation-for="Input.Date" class="text-danger"></span>
+        <button type="submit" class="btn btn-primary mt-4 mb-4">Submit</button>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
 </form>
 
 

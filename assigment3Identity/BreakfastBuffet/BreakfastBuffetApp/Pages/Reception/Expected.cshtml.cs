@@ -11,9 +11,6 @@ namespace BreakfastBuffetApp.Pages
     [Authorize("Reception")]
     public class ReceptionModel : PageModel
     {
-        private DateTime _now = DateTime.Now;
-        private int _day = DateTime.Now.Day;
-        private int _month = DateTime.Now.Month;
         [BindProperty] public static bool ExpectedGuestsSucceeded { get; set; }
         public string? ExpectedGuestsMessage { get; set; }
         private IBreakfastService _breakfastService;
