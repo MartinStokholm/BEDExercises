@@ -6,37 +6,46 @@
 <h1>Checkin Guests</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CheckedIn.RoomNumber" class="control-label"></label>
-                <input asp-for="CheckedIn.RoomNumber" class="form-control" />
-                <span asp-validation-for="CheckedIn.RoomNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CheckedIn.Adults" class="control-label"></label>
-                <input asp-for="CheckedIn.Adults" class="form-control" />
-                <span asp-validation-for="CheckedIn.Adults" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CheckedIn.Children" class="control-label"></label>
-                <input asp-for="CheckedIn.Children" class="form-control" />
-                <span asp-validation-for="CheckedIn.Children" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary mt-2 mb-2" />
-            </div>
-        </form>
-        <div>
-            <img class="mt-4 mb-4" src="https://listimg.pinclipart.com/picdir/s/459-4590946_clipart-customers-restaurant-png-download.png" />
-        </div>
-    </div>
-</div>
+<div class="row-cols-1">
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+    <div class="col">
+        <h3>Checkin guests for breakfast</h3>
+
+        <div>
+            <form method="Post">
+                <h4>Date:</h4><input class="form-control" asp-for="Input.Date" />
+                <br />
+                <label for="aamount" title="Roomnumber "></label>
+                Roomnumber:
+                <br />
+                <input id="aamount" type="number" asp-for="Input.Roomnumber">
+                <br />
+                <label for="aamount" title="Adults "></label>
+                Adults:
+                <br />
+                <input id="aamount" type="number" asp-for="Input.Adults">
+                <br />
+                <label for="camount" title="Children "></label>
+                Children:
+                <br />
+                <input id="camount" type="number" asp-for="Input.Children">
+                <br />
+                <br />
+                <button id="reservationSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            </form>
+        </div>
+        <div>
+            <p></p>
+        </div>
+    
+        @if (Model.CheckInMessage != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <h2>
+                    @Model.CheckInMessage
+                </h2>
+            </div>
+        }
+    </div>
+
+</div>
