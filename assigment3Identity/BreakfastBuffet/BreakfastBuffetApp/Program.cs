@@ -26,9 +26,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 0;
 });
 
+builder.Services.AddSignalR();
+
 builder.Services.AddRazorPages();
 
-// inject the controller/service class for use in the razor pages
+// inject the breakfast controller/service class for use in the razor pages
 builder.Services.AddTransient<IBreakfastService, BreakfastService>();
 
 builder.Services.AddAuthorization(options =>
@@ -38,6 +40,10 @@ builder.Services.AddAuthorization(options =>
     );
     options.AddPolicy("Waiter",
         policyBuilder => policyBuilder.RequireClaim("WaiterAccess"));
+    
+    options.AddPolicy("Kitchen",
+        policyBuilder => policyBuilder.RequireClaim("KitchenAccess")
+    );
 });
 
 var app = builder.Build();
@@ -55,13 +61,17 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapHub<KitchenReportService>("/KitchenReportService");
 
 app.Run();

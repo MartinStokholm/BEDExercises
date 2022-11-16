@@ -1,0 +1,58 @@
+﻿@page
+@model BreakfastBuffetApp.Pages.Kitchen.KitchenReportModel
+@{
+}
+<h1>KitchenPage</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.Date"></label>
+        <input class="form-control" type="date" data-val="true" asp-for="Input.Date" />
+        <span asp-validation-for="Input.Date" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Expected guests</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Expected adults:</td>
+            <td>@Html.DisplayFor(x => x._adultsExpected)</td>
+        </tr>
+        <tr>
+            <td>Expected children:</td>
+            <td>@Html.DisplayFor(x => x._childrenExpected)</td>
+        </tr>
+        <tr>
+            <td>Total of expected:</td>
+            <td>@Html.DisplayFor(x => x._totalExpected)</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>Guest checked in</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Checked in adults:</td>
+            <td>@Html.DisplayFor(x => x._adultsCheckedIn)</td>
+        </tr>
+        <tr>
+            <td>Checked in children:</td>
+            <td>@Html.DisplayFor(x => x._childrenCheckedIn)</td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/kitchen.js"></script>
