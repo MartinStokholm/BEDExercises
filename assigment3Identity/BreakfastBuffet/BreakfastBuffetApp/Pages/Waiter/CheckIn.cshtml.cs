@@ -16,10 +16,7 @@ namespace BreakfastBuffetApp.Pages.Waiter
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+        public IActionResult OnGet() { return Page(); }
 
         [BindProperty]
         public CheckedIn CheckedIn { get; set; }
@@ -28,7 +25,7 @@ namespace BreakfastBuffetApp.Pages.Waiter
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return RedirectToPage("../Error");
             }
 
             _context.CheckedIns.Add(CheckedIn);

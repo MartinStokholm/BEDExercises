@@ -52,6 +52,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    Console.WriteLine("develepment mode");
 }
 else
 {
