@@ -8,18 +8,30 @@ namespace BreakfastBuffetApp.Services
     {
         public async Task<bool> AddExpected(ApplicationDbContext context, int day, int month, int adults, int children)
         {
-            var b = await context.KitchenReports
+            var dbKitchenReports = await context.KitchenReports
                 .Include(b => b.Expected)
                 .FirstOrDefaultAsync(b => b.Day == day && b.Month == month);
-            if (b == null)
+            
+            if (dbKitchenReports == null)
             {
-                return false;
+                List<KitchenReport> kitchenReport = new();
+                for (int i = day; i < day + 7; i++)
+                {
+                    var kp = new KitchenReport() { Day = i, Month = 11 };
+                    kitchenReport.Add(kp);
+                }
+
+                foreach (var item in kitchenReport)
+                {
+                    context.KitchenReports.Add(item);
+                    context.SaveChanges();
+                }
             }
 
-            b.Expected.Adults += adults;
-            b.Expected.Children += children;
+            dbKitchenReports.Expected.Adults += adults;
+            dbKitchenReports.Expected.Children += children;
 
-            context.Entry(b).State = EntityState.Modified;
+            context.Entry(dbKitchenReports).State = EntityState.Modified;
 
             try
             {
@@ -35,23 +47,23 @@ namespace BreakfastBuffetApp.Services
 
         public async Task<bool> AddCheckedIn(ApplicationDbContext context, int day, int month, int roomNumber, int adults, int children)
         {
-            var b = context.KitchenReports
+            var dbKitchenReports = context.KitchenReports
                 .Include(b => b.CheckedIn)
                 .FirstOrDefault(b => b.Day == day && b.Month == month);
 
-            if (b == null)
+            if (dbKitchenReports == null)
             {
                 return false;
             }
 
-            b.CheckedIn.Add(new CheckedIn
+            dbKitchenReports.CheckedIn.Add(new CheckedIn
             {
                 RoomNumber = roomNumber,
                 Adults = adults,
                 Children = children
             });
 
-            context.Entry(b).State = EntityState.Modified;
+            context.Entry(dbKitchenReports).State = EntityState.Modified;
 
             try
             {
