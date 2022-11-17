@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/KitchenReport").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("/KitchenHub").build();
 
 connection.start().then(function () {
     console.log("Connected");
@@ -10,6 +10,6 @@ connection.start().then(function () {
 
 });
 
-connection.on("kitchenUpdate", function () {
+connection.on("KitchenUpdate", function () {
     window.location.reload();
 });

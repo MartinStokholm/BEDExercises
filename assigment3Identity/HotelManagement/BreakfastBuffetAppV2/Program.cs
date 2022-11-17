@@ -68,6 +68,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.MapHub<KitchenReport>("/KitchenReport");
+app.MapHub<KitchenHub>("/KitchenReport");
 
 app.Run();

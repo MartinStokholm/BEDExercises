@@ -65,8 +65,6 @@ namespace BreakfastBuffetAppV2.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
         public class InputModel
         {
             [Required]
@@ -92,13 +90,11 @@ namespace BreakfastBuffetAppV2.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 
@@ -107,6 +103,13 @@ namespace BreakfastBuffetAppV2.Areas.Identity.Pages.Account
                 {
                     return Page();
                 }
+                
+                foreach (var claim in userClaims)
+                {
+                    var res = await _userManager.AddClaimAsync(user, claim);
+                    Console.WriteLine(res.Succeeded);
+                }
+                
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -170,12 +173,12 @@ namespace BreakfastBuffetAppV2.Areas.Identity.Pages.Account
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
 
-        private IdentityUser CreateUser(UserCategory type)
+        private IdentityUser CreateUser(UserCategory category)
         {
             try
             {
                 userClaims = new List<Claim>();
-                switch (type)
+                switch (category)
                 {
                     case UserCategory.ReceptionUser:
                         {

@@ -1,14 +1,20 @@
 using BreakfastBuffetAppV2.Data;
+using BreakfastBuffetAppV2.Hub;
 using BreakfastBuffetAppV2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using System.ComponentModel.DataAnnotations;
 
 namespace BreakfastBuffetAppV2.Pages.Reception
 {
+    [Authorize("Reception")]
     public class ExpectedGuestsModel : PageModel
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly IHubContext<KitchenHub, IKitchenHub> _kitchenHub;
+
         [BindProperty] public InputModel Input { get; set; }
         public class InputModel
         {
@@ -20,9 +26,10 @@ namespace BreakfastBuffetAppV2.Pages.Reception
             public int Children { get; set; } = 0;
         }
 
-        public ExpectedGuestsModel(ApplicationDbContext context)
+        public ExpectedGuestsModel(ApplicationDbContext context, IHubContext<KitchenHub, IKitchenHub> kitchenHub)
         {
             _context = context;
+            _kitchenHub = kitchenHub;
             Input = new InputModel();
         }
         public IActionResult OnPostRedirect()
@@ -41,7 +48,7 @@ namespace BreakfastBuffetAppV2.Pages.Reception
 
             _context.BreakfastGuestsExpecteds.Add(breakfastGuestsExpected);
             await _context.SaveChangesAsync();
-
+            _kitchenHub.Clients.All.KitchenUpdate();
             return Page();
         }
 

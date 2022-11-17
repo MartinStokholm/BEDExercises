@@ -1,5 +1,6 @@
 using BreakfastBuffetAppV2.Data;
 using BreakfastBuffetAppV2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using System.Data;
 
 namespace BreakfastBuffetAppV2.Pages.Reception
 {
+    [Authorize("Reception")]
     public class BreakfastHistoryModel : PageModel
     {
         private readonly ApplicationDbContext _context;

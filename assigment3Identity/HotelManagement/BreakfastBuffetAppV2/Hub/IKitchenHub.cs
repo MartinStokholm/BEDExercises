@@ -1,6 +1,6 @@
 ﻿namespace BreakfastBuffetAppV2.Hub
 {
-    public interface IKitchenReport
+    public interface IKitchenHub
     {
         Task KitchenUpdate();
     }

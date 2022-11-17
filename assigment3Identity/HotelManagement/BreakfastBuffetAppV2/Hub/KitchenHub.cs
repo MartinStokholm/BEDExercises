@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 namespace BreakfastBuffetAppV2.Hub
 {
-    public class KitchenReport : Hub<IKitchenReport>
+    public class KitchenHub : Hub<IKitchenHub>
     {
         public async Task KitchenUpdate()
         {

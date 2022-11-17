@@ -8,13 +8,14 @@ using BreakfastBuffetAppV2.Data;
 using Microsoft.EntityFrameworkCore;
 using BreakfastBuffetAppV2.Hub;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BreakfastBuffetAppV2.Pages.Kitchen
 {
+    [Authorize("Kitchen")]
     public class BreakfastReportModel : PageModel
     {
        
-        private readonly IHubContext<KitchenReport, IKitchenReport> _kitchenContext;
         private readonly ApplicationDbContext _context;
 
         public int _adultsExpected;
@@ -31,11 +32,9 @@ namespace BreakfastBuffetAppV2.Pages.Kitchen
             public DateTime Date { get; set; } = DateTime.Now;
         }
 
-        public BreakfastReportModel(ApplicationDbContext context,
-            IHubContext<KitchenReport, IKitchenReport> kitchenContext)
+        public BreakfastReportModel(ApplicationDbContext context)
         {
             _context = context;
-            _kitchenContext = kitchenContext;
             Input = new InputModel();
         }
         
