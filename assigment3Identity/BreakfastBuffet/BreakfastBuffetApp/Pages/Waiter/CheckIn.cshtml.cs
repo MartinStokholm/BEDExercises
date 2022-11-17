@@ -21,7 +21,7 @@ namespace BreakfastBuffetApp.Pages.Waiter
         {
             [Required]
             [DataType(DataType.Date)]
-            public DateTime Date { get; set; } = new DateTime();
+            public DateTime Date { get; set; } = DateTime.Today;
             public int Roomnumber { get; set; } = 0;
             public int Adults { get; set; } = 0;
             public int Children { get; set; } = 0;
@@ -36,6 +36,7 @@ namespace BreakfastBuffetApp.Pages.Waiter
         {
             _breakfastService = breakfastService;
             _context = context;
+            Input = new InputModel();
         }
 
         public void OnGet() { }
