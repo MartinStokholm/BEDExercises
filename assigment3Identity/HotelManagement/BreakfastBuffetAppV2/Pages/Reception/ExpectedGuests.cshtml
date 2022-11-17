@@ -15,10 +15,12 @@
 
             <h5>Children:</h5>
             <input type="number" asp-for="Input.Children" />
+            
+            <button id="reservationSubmit" type="submit" class="w-100 btn btn-lg btn-primary mt-4">Save</button>
+
         </form>
        
         <div class="mt-4">
-            <button id="reservationSubmit" type="submit" class="w-100 btn btn-lg btn-primary mb-4">Save</button>
             <form method="Post" asp-page-handler="Redirect">
                 <button type="submit" class="w-100 btn btn-lg btn-primary">Go to breakfast history</button>
             </form>
