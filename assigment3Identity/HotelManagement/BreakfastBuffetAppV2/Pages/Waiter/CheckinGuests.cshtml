@@ -1,0 +1,32 @@
+﻿@page
+@model BreakfastBuffetAppV2.Pages.Waiter.CheckinGuestsModel
+@{
+}
+
+<div class="row-cols-1">
+    <div class="col">
+        <h4>How many guests are we checking in for breakfast?</h4>
+        <div>
+            <form method="Post">
+                <div class="m-4">
+                    <div class="m-2">
+                        <label for="ramount" title="Adults">Roomnumber:</label>
+                        <input id="ramount" type="number" asp-for="Input.Roomnumber">
+                    </div>
+                    
+                    <div class="m-2">
+                        <label for="aamount" title="Adults">Adults:</label>
+                        <input id="aamount" type="number" asp-for="Input.Adults">
+                    </div>
+
+                    <div class="m-2">
+                        <label for="camount" title="Children">Children:</label>
+                        <input id="camount" type="number" asp-for="Input.Children">
+                    </div>
+                </div>
+
+                <button id="reservationSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
