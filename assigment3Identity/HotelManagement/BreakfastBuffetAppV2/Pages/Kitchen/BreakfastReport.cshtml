@@ -2,3 +2,62 @@
 @model BreakfastBuffetAppV2.Pages.Kitchen.BreakfastReportModel
 @{
 }
+<div>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Input.Date"></label>
+            <input class="form-control" type="date" data-val="true" asp-for="Input.Date" />
+
+            <span asp-validation-for="Input.Date" class="text-danger"></span>
+            <button type="submit" class="btn btn-primary mt-4 mb-4">Update</button>
+        </div>
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Expected guests</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Adults:</td>
+                <td>@Html.DisplayFor(x => x._adultsExpected)</td>
+            </tr>
+            <tr>
+                <td>Children:</td>
+                <td>@Html.DisplayFor(x => x._childrenExpected)</td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td>@Html.DisplayFor(x => x._totalExpected)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Guest checked in</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Adults:</td>
+                <td>@Html.DisplayFor(x => x._adultsCheckedIn)</td>
+            </tr>
+            <tr>
+                <td>Children:</td>
+                <td>@Html.DisplayFor(x => x._childrenCheckedIn)</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="w-50">
+        <img src="https://thumbs.dreamstime.com/b/breakfast-buffet-full-continental-english-coffee-orange-juice-salad-croissant-fruit-77238300.jpg" />
+    </div>
+
+</div>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/KitchenUpdate.js"></script>

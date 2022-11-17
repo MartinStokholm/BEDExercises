@@ -25,6 +25,10 @@ namespace BreakfastBuffetAppV2.Pages.Reception
             _context = context;
             Input = new InputModel();
         }
+        public IActionResult OnPostRedirect()
+        {
+            return RedirectToPage("BreakfastHistory");
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
