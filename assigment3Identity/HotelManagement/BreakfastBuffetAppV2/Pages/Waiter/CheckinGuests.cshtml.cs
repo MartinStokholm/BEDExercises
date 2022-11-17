@@ -32,7 +32,7 @@ namespace BreakfastBuffetAppV2.Pages.Waiter
             var breakfastCheckin = new BreakfastCheckIn
             {
                 Adults = Input.Adults,
-                Kids = Input.Children,
+                Children = Input.Children,
                 Date = Input.Date,
                 Roomnumber = Input.Roomnumber
             };

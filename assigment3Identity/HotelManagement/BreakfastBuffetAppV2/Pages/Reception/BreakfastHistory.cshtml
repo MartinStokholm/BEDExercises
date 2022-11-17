@@ -2,3 +2,41 @@
 @model BreakfastBuffetAppV2.Pages.Reception.BreakfastHistoryModel
 @{
 }
+<div>
+    <h2> Who had breakfast on: @Model.DateNow</h2>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Room Number
+            </th>
+            <th>
+                Adults
+            </th>
+            <th>
+                Children
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CheckedIn)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roomnumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adults)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Children)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

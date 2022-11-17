@@ -31,7 +31,7 @@ namespace BreakfastBuffetAppV2.Pages.Reception
            var breakfastGuestsExpected = new BreakfastGuestsExpected
            {
                 Adults = Input.Adults,
-                Kids = Input.Children,
+                Children = Input.Children,
                 Date = Input.Date
            };
 
