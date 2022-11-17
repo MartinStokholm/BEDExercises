@@ -2,60 +2,38 @@
 @model BreakfastBuffetAppV2.Pages.Kitchen.BreakfastReportModel
 @{
 }
-<div>
-    <form method="post">
-        <div class="form-group">
-            <label asp-for="Input.Date"></label>
-            <input class="form-control" type="date" data-val="true" asp-for="Input.Date" />
 
-            <span asp-validation-for="Input.Date" class="text-danger"></span>
-            <button type="submit" class="btn btn-primary mt-4 mb-4">Update</button>
+<div class="border border-primary rounded">
+
+    <form class="mx-4 mt-4" method="post">
+        <div class="form-group d-flex mb-4">
+            <input class="form-control" type="date" data-val="true" asp-for="Input.Date" />
+            <button type="submit" class="btn btn-primary">Update</button>
         </div>
     </form>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Expected guests</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Adults:</td>
-                <td>@Html.DisplayFor(x => x._adultsExpected)</td>
-            </tr>
-            <tr>
-                <td>Children:</td>
-                <td>@Html.DisplayFor(x => x._childrenExpected)</td>
-            </tr>
-            <tr>
-                <td>Total:</td>
-                <td>@Html.DisplayFor(x => x._totalExpected)</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Guest checked in</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Adults:</td>
-                <td>@Html.DisplayFor(x => x._adultsCheckedIn)</td>
-            </tr>
-            <tr>
-                <td>Children:</td>
-                <td>@Html.DisplayFor(x => x._childrenCheckedIn)</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="w-50">
-        <img src="https://thumbs.dreamstime.com/b/breakfast-buffet-full-continental-english-coffee-orange-juice-salad-croissant-fruit-77238300.jpg" />
+    
+    <div class=" d-flex justify-content-center">
+      
+        <div class="m-4">
+            <h3>Expected guests:</h3>
+            <h4>Adults</h4>
+            @Html.DisplayFor(x => x._adultsExpected)
+            <h4>Children</h4>
+            @Html.DisplayFor(x => x._childrenExpected)
+            <h4>Total</h4>
+            @Html.DisplayFor(x => x._totalExpected)
+        </div>
+        <div class="m-4">
+            <h3>Guests checked in:</h3>
+            <h4>Adults</h4>
+            @Html.DisplayFor(x => x._adultsCheckedIn)
+            <h4>Children</h4>
+            @Html.DisplayFor(x => x._childrenCheckedIn)
+        </div>
     </div>
-
+    <div class="text-center my-4">
+        <img width="400" src="https://thumbs.dreamstime.com/b/breakfast-buffet-full-continental-english-coffee-orange-juice-salad-croissant-fruit-77238300.jpg" />
+    </div>
 </div>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
