@@ -1,0 +1,268 @@
+{
+  "Sets": [
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1658,
+      "Name": "Voyage to the Sunken City"
+    },
+    {
+      "collectibleCount": 382,
+      "Id": 1646,
+      "Name": "Classic Cards",
+      "Type": ""
+    },
+    {
+      "Type": "",
+      "collectibleCount": 250,
+      "Id": 1637,
+      "Name": "Core"
+    },
+    {
+      "Type": "",
+      "collectibleCount": 425,
+      "Id": 1635,
+      "Name": "Legacy"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 170,
+      "Id": 1626,
+      "Name": "Fractured in Alterac Valley"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 170,
+      "Id": 1578,
+      "Name": "United in Stormwind"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 170,
+      "Id": 1525,
+      "Name": "Forged in the Barrens"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 170,
+      "Id": 1466,
+      "Name": "Madness at the Darkmoon Faire"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1443,
+      "Name": "Scholomance Academy"
+    },
+    {
+      "Type": "base",
+      "collectibleCount": 20,
+      "Id": 1463,
+      "Name": "Demon Hunter Initiate"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1414,
+      "Name": "Ashes of Outland"
+    },
+    {
+      "Type": "adventure",
+      "collectibleCount": 35,
+      "Id": 1403,
+      "Name": "Galakrond\u2019s Awakening"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 140,
+      "Id": 1347,
+      "Name": "Descent of Dragons"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1158,
+      "Name": "Saviors of Uldum"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 136,
+      "Id": 1130,
+      "Name": "Rise of Shadows"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1129,
+      "Name": "Rastakhan\u2019s Rumble"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 136,
+      "Id": 1127,
+      "Name": "The Boomsday Project"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 129,
+      "Id": 1125,
+      "Name": "The Witchwood"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1004,
+      "Name": "Kobolds and Catacombs"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 1001,
+      "Name": "Knights of the Frozen Throne"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 135,
+      "Id": 27,
+      "Name": "Journey to Un\u2019Goro"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 132,
+      "Id": 25,
+      "Name": "Mean Streets of Gadgetzan"
+    },
+    {
+      "Type": "adventure",
+      "collectibleCount": 45,
+      "Id": 23,
+      "Name": "One Night in Karazhan"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 134,
+      "Id": 21,
+      "Name": "Whispers of the Old Gods"
+    },
+    {
+      "Type": "adventure",
+      "collectibleCount": 45,
+      "Id": 20,
+      "Name": "League of Explorers"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 132,
+      "Id": 15,
+      "Name": "The Grand Tournament"
+    },
+    {
+      "Type": "adventure",
+      "collectibleCount": 31,
+      "Id": 14,
+      "Name": "Blackrock Mountain"
+    },
+    {
+      "Type": "expansion",
+      "collectibleCount": 123,
+      "Id": 13,
+      "Name": "Goblins vs Gnomes"
+    },
+    {
+      "Type": "adventure",
+      "collectibleCount": 30,
+      "Id": 12,
+      "Name": "Curse of Naxxramas"
+    }
+  ],
+  "Rarities": [
+    {
+      "Id": 1,
+      "Name": "Common"
+    },
+    {
+      "Id": 2,
+      "Name": "Free"
+    },
+    {
+      "Id": 3,
+      "Name": "Rare"
+    },
+    {
+      "Id": 4,
+      "Name": "Epic"
+    },
+    {
+      "Id": 5,
+      "Name": "Legendary"
+    }
+  ],
+  "Classes": [
+    {
+      "Id": 14,
+      "Name": "Demon Hunter"
+    },
+    {
+      "Id": 2,
+      "Name": "Druid"
+    },
+    {
+      "Id": 3,
+      "Name": "Hunter"
+    },
+    {
+      "Id": 4,
+      "Name": "Mage"
+    },
+    {
+      "Id": 5,
+      "Name": "Paladin"
+    },
+    {
+      "Id": 6,
+      "Name": "Priest"
+    },
+    {
+      "Id": 7,
+      "Name": "Rogue"
+    },
+    {
+      "Id": 8,
+      "Name": "Shaman"
+    },
+    {
+      "Id": 9,
+      "Name": "Warlock"
+    },
+    {
+      "Id": 10,
+      "Name": "Warrior"
+    },
+    {
+      "Id": 12,
+      "Name": "Neutral"
+    }
+  ],
+  "Types": [
+    {
+      "Id": 3,
+      "Name": "Hero"
+    },
+    {
+      "Id": 4,
+      "Name": "Minion"
+    },
+    {
+      "Id": 5,
+      "Name": "Spell"
+    },
+    {
+      "Id": 7,
+      "Name": "Weapon"
+    },
+    {
+      "Id": 10,
+      "Name": "HeroPower"
+    }
+  ]
+}
