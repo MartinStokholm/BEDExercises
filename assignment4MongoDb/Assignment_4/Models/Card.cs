@@ -10,11 +10,13 @@ namespace Assignment_4.Models
         public int Id { get; set; }
         public string? Name { get; set; }
 
+        [JsonPropertyName("cardClassId")]
         public int ClassId { get; set; }
        
+        [JsonPropertyName("cardTypeId")]
         public int TypeId { get; set; }
 
-     
+        [JsonPropertyName("cardSetId")]
         public int SetId { get; set; }
         public int? SpellSchoolId { get; set; }
         public int RarityId { get; set; }
