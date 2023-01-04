@@ -31,26 +31,16 @@ public class SetsService
 
     public void CreateSets()
     {
-        if (_setCollection.CountDocuments(c => true) != 0)
-        {
-            return;
-        }
         foreach (var path in new[] { "metadata.json" })
         {
-            using (var file = new StreamReader(path))
-            {
-                var metadata = JsonSerializer.Deserialize<Metadata>(file.ReadToEnd(), new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            using var file = new StreamReader(path);
+            var metadata = JsonSerializer.Deserialize<Metadata>(file.ReadToEnd(), new JsonSerializerOptions
+            { PropertyNameCaseInsensitive = true });
 
-                if (metadata == null || metadata.Types == null)
-                {
-                    return;
-                }
+            if (metadata == null || metadata.Sets == null)
+                return;
 
-                _setCollection.InsertMany(metadata.Sets);
-            }
+            _setCollection.InsertMany(metadata.Sets);
         }
     }
 }

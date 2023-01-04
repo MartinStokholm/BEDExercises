@@ -27,25 +27,16 @@ public class TypesService
 
     public void CreateTypes()
     {
-        if (_typesCollection.CountDocuments(c => true) != 0)
-        {
-            return;
-        }
-        
         foreach (var path in new[] { "metadata.json" })
         {
-            using (var file = new StreamReader(path))
-            {
-                var metadata = JsonSerializer.Deserialize<Metadata>(file.ReadToEnd(), new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            using var file = new StreamReader(path);
+            var metadata = JsonSerializer.Deserialize<Metadata>(file.ReadToEnd(), new JsonSerializerOptions
+            { PropertyNameCaseInsensitive = true });
 
-                if (!(metadata == null || metadata.Types == null))
-                {
-                    _typesCollection.InsertMany(metadata.Types);
-                }
-            }
+            if (metadata == null || metadata.Types == null)
+                return;
+
+            _typesCollection.InsertMany(metadata.Types);
         }
     }
 }

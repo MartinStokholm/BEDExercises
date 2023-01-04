@@ -62,21 +62,13 @@ public class CardsService
     }
     public void CreateCards()
     {
-        if (_cardCollection.CountDocuments(c => true) != 0)
-        {
-            return;
-        }
-        
         foreach (var path in new[] { "cards.json" })
         {
-            using (var file = new StreamReader(path))
-            {
-                var cards = JsonSerializer.Deserialize<List<Card>>(file.ReadToEnd(), new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-                _cardCollection.InsertMany(cards);
-            }
+            using var file = new StreamReader(path);
+            var cards = JsonSerializer.Deserialize<List<Card>>(file.ReadToEnd(), new JsonSerializerOptions
+            { PropertyNameCaseInsensitive = true });
+
+            _cardCollection.InsertMany(cards);
         }
     }
    

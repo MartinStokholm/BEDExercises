@@ -31,27 +31,16 @@ public class ClassesService
 
     public void CreateClasses()
     {
-        if (_classCollection.CountDocuments(c => true) != 0)
-        {
-            return;
-        }
-        
         foreach (var path in new[] { "metadata.json" })
         {
-            using (var file = new StreamReader(path))
-            {
-                var metadata = JsonSerializer.Deserialize<Metadata>(file.ReadToEnd(), new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            using var file = new StreamReader(path);
+            var metadata = JsonSerializer.Deserialize<Metadata>(file.ReadToEnd(), new JsonSerializerOptions
+            { PropertyNameCaseInsensitive = true });
 
-                if (metadata == null || metadata.Types == null)
-                {
-                    return;
-                }
+            if (metadata == null || metadata.Classes == null)
+                return;
 
-                _classCollection.InsertMany(metadata.Classes);
-            }
+            _classCollection.InsertMany(metadata.Classes);
         }
     }
 }
