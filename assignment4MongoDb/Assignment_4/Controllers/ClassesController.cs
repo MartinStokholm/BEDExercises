@@ -30,13 +30,6 @@ public class ClassesController : ControllerBase
         return Ok(classes);
 
     }
-
-    [HttpPost]
-    public ActionResult Post()
-    {
-        _classesService.CreateClasses();
-        return Ok();
-    }
 }
 
 

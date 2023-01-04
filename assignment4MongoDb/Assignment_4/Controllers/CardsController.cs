@@ -33,12 +33,5 @@ public class CardsController : ControllerBase
         _logger.LogInformation($"EntityCount={result.Count} ");
         return Ok(result);
     }
-
-    [HttpPost]
-    public ActionResult SeedData()
-    {
-        _cardsService.CreateCards();
-        return Ok();
-    }
 }
 

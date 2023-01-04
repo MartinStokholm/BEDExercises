@@ -31,13 +31,6 @@ public class RaritiesController : ControllerBase
         return Ok(rarity);
 
     }
-
-    [HttpPost]
-    public ActionResult Post()
-    {
-        _raritysService.CreateRarities();
-        return Ok();
-    }
 }
 
 

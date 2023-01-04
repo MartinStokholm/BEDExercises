@@ -32,12 +32,4 @@ public class TypesController : ControllerBase
         return Ok(cardtype);
 
     }
-
-    [HttpPost]
-    public ActionResult Post()
-    {
-        _typesService.CreateCardTypes();
-        return Ok();
-    }
-
 }

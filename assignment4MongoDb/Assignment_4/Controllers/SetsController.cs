@@ -30,13 +30,6 @@ public class SetsController : ControllerBase
         return Ok(set);
 
     }
-
-    [HttpPost]
-    public ActionResult Post()
-    {
-        _setsService.CreateSets();
-        return Ok();
-    }
 }
 
 
