@@ -16,6 +16,7 @@ public class RaritiesService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _rarityCollection = database.GetCollection<Rarity>("RarityCollection");
+        CreateRarities();
     }
 
     public async Task<List<Rarity>> GetAsync()

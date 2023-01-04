@@ -18,6 +18,7 @@ public class TypesService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _typesCollection = database.GetCollection<Types>("CardTypeCollection");
+        CreateCardTypes();
     }
 
     public async Task<List<Types>> GetAsync()
@@ -36,12 +37,10 @@ public class TypesService
                     PropertyNameCaseInsensitive = true
                 });
 
-                if (metadata == null || metadata.Types == null)
+                if (!(metadata == null || metadata.Types == null))
                 {
-                    return;
+                    _typesCollection.InsertMany(metadata.Types);
                 }
-
-                _typesCollection.InsertMany(metadata.Types);
             }
         }
     }

@@ -24,6 +24,7 @@ public class CardsService
         _setCollection = database.GetCollection<Set>("SetCollection");
         _cardTypeCollection = database.GetCollection<Types>("CardTypeCollection");
         _rarityCollection = database.GetCollection<Rarity>("RarityCollection");
+        CreateCards();
     }    
     public async Task<List<CardWithMetaDataDto>> GetCardsByQueryAsync(QueryParams queryParams)
     {

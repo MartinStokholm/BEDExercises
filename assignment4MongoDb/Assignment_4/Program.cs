@@ -12,11 +12,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDb"));
 
-builder.Services.AddSingleton<CardsService>();
 builder.Services.AddSingleton<TypesService>();
 builder.Services.AddSingleton<ClassesService>();
 builder.Services.AddSingleton<RaritiesService>();
 builder.Services.AddSingleton<SetsService>();
+builder.Services.AddSingleton<CardsService>();
+
 
 
 builder.Services.AddControllers();
