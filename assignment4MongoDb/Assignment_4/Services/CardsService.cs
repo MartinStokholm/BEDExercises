@@ -24,8 +24,7 @@ public class CardsService
         _setCollection = database.GetCollection<Set>("SetCollection");
         _cardTypeCollection = database.GetCollection<Types>("CardTypeCollection");
         _rarityCollection = database.GetCollection<Rarity>("RarityCollection");
-    }
-
+    }    
     public async Task<List<CardWithMetaDataDto>> GetCardsByQueryAsync(QueryParams queryParams)
     {
         var result = new List<Card>();
@@ -58,7 +57,6 @@ public class CardsService
 
         return JoinCardsWithMetaData(result);
     }
-
     public void CreateCards()
     {
         foreach (var path in new[] { "cards.json" })
