@@ -16,7 +16,11 @@ public class ClassesService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _classCollection = database.GetCollection<Class>("ClassCollection");
-        CreateClasses();
+        
+        if (_classCollection.CountDocuments(c => true) == 0)
+        {
+            CreateClasses();
+        }
     }
 
     public async Task<List<Class>> GetAsync()

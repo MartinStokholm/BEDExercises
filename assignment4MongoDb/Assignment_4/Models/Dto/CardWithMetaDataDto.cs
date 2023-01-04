@@ -9,7 +9,7 @@ namespace Assignment_4.Models.Dto
         public string? Class { get; set; }
         public string? Type { get; set; }
         public string? Set { get; set; }
-        public string? SpellSchool { get; set; }
+        public int? SpellSchoolId { get; set; }
         public string? Rarity { get; set; }
         public int? Health { get; set; }
         public int? Attack { get; set; }

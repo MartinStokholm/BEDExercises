@@ -24,7 +24,12 @@ public class CardsService
         _setCollection = database.GetCollection<Set>("SetCollection");
         _cardTypeCollection = database.GetCollection<Types>("CardTypeCollection");
         _rarityCollection = database.GetCollection<Rarity>("RarityCollection");
-        CreateCards();
+
+        if (_cardCollection.CountDocuments(c => true) == 0)
+        {
+            CreateCards();
+        }
+        
     }    
     public async Task<List<CardWithMetaDataDto>> GetCardsByQueryAsync(QueryParams queryParams)
     {
@@ -76,29 +81,60 @@ public class CardsService
     // joins the card with the metadata by id and returns a list of cards with strings instead of ids
     public List<CardWithMetaDataDto> JoinCardsWithMetaData(List<Card> cards)
     {
-        var query = from card in cards
-                    join classType in _classCollection.AsQueryable() on card.ClassId equals classType.Id
-                    join cardType in _cardTypeCollection.AsQueryable() on card.TypeId equals cardType.Id
-                    join rarity in _rarityCollection.AsQueryable() on card.RarityId equals rarity.Id
-                    join set in _setCollection.AsQueryable() on card.SetId equals set.Id
+        //var query = from card in cards
+        //            join classType in _classCollection.AsQueryable() on card.ClassId equals classType.Id
+        //            join cardType in _cardTypeCollection.AsQueryable() on card.TypeId equals cardType.Id
+        //            join rarity in _rarityCollection.AsQueryable() on card.RarityId equals rarity.Id
+        //            join set in _setCollection.AsQueryable() on card.SetId equals set.Id
                    
-                    select new CardWithMetaDataDto
-                    {
-                        Id = card.Id,
-                        Name = card.Name,
-                        Type = cardType.Name,
-                        Class = classType.Name,
-                        Set = set.Name,
-                        SpellSchool = "not found",
-                        Rarity = rarity.Name,
-                        Health = card.Health,
-                        Attack = card.Attack,
-                        ManaCost = card.ManaCost,
-                        Artist = card.Artist,
-                        Text = card.Text,
-                        FlavorText = card.FlavorText,
-                    };
+        //            select new CardWithMetaDataDto
+        //            {
+        //                Id = card.Id,
+        //                Name = card.Name,
+        //                Type = cardType.Name,
+        //                Class = classType.Name,
+        //                Set = set.Name,
+                        
+        //                Rarity = rarity.Name,
+        //                Health = card.Health,
+        //                Attack = card.Attack,
+        //                ManaCost = card.ManaCost,
+        //                Artist = card.Artist,
+        //                Text = card.Text,
+        //                FlavorText = card.FlavorText,
+        //            };
 
-        return query.ToList();
+        //return query.ToList();
+        
+        var result = new List<CardWithMetaDataDto>();
+
+        foreach (var card in cards)
+        {
+            result.Add(new CardWithMetaDataDto
+            {
+                Id = card.Id,
+                Name = card.Name,
+                Class = (from c in _classCollection.AsQueryable()
+                         where c.Id == card.ClassId
+                         select c.Name).FirstOrDefault(),
+                Type = (from t in _cardTypeCollection.AsQueryable()
+                        where t.Id == card.TypeId
+                        select t.Name).FirstOrDefault(),
+                Set = (from s in _setCollection.AsQueryable()
+                       where s.Id == card.SetId
+                       select s.Name).FirstOrDefault(),
+                SpellSchoolId = card.SpellSchoolId,
+                Rarity = (from r in _rarityCollection.AsQueryable()
+                          where r.Id == card.RarityId
+                          select r.Name).FirstOrDefault(),
+                Health = card.Health,
+                Attack = card.Attack,
+                ManaCost = card.ManaCost,
+                Artist = card.Artist,
+                Text = card.Text,
+                FlavorText = card.FlavorText
+            });
+        }
+        return result;
     }
 }

@@ -16,7 +16,12 @@ public class SetsService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _setCollection = database.GetCollection<Set>("SetCollection");
-        CreateSets();
+
+        if (_setCollection.CountDocuments(c => true) == 0)
+        {
+            CreateSets();
+        }
+        
     }
 
     public async Task<List<Set>> GetAsync()

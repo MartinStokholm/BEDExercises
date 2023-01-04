@@ -18,7 +18,12 @@ public class TypesService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _typesCollection = database.GetCollection<Types>("CardTypeCollection");
-        CreateCardTypes();
+
+        if (_typesCollection.CountDocuments(c => true) == 0)
+        {
+            CreateCardTypes();
+        }
+
     }
 
     public async Task<List<Types>> GetAsync()
