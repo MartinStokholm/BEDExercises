@@ -16,12 +16,7 @@ public class SetsService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _setCollection = database.GetCollection<Set>(mongoDbSettings.Value.SetCollectionName);
-        
-        if (_setCollection.CountDocuments(c => true) == 0)
-        {
-            CreateSets();
-        }
-        
+                
     }
 
     public async Task<List<Set>> GetAsync()
@@ -36,6 +31,10 @@ public class SetsService
 
     public void CreateSets()
     {
+        if (_setCollection.CountDocuments(c => true) != 0)
+        {
+            return;
+        }
         foreach (var path in new[] { "metadata.json" })
         {
             using (var file = new StreamReader(path))

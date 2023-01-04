@@ -18,12 +18,6 @@ public class TypesService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _typesCollection = database.GetCollection<Types>(mongoDbSettings.Value.CardTypeCollectionName);
-
-        if (_typesCollection.CountDocuments(c => true) == 0)
-        {
-            CreateCardTypes();
-        }
-
     }
 
     public async Task<List<Types>> GetAsync()
@@ -31,8 +25,13 @@ public class TypesService
         return await _typesCollection.Find(c => true).ToListAsync();
     }
 
-    public void CreateCardTypes()
+    public void CreateTypes()
     {
+        if (_typesCollection.CountDocuments(c => true) != 0)
+        {
+            return;
+        }
+        
         foreach (var path in new[] { "metadata.json" })
         {
             using (var file = new StreamReader(path))

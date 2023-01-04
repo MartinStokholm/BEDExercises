@@ -17,11 +17,6 @@ public class RaritiesService
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _rarityCollection = database.GetCollection<Rarity>(mongoDbSettings.Value.RarityCollectionName);
 
-        if (_rarityCollection.CountDocuments(c => true) == 0)
-        {
-            CreateRarities();
-        }
-        
     }
 
     public async Task<List<Rarity>> GetAsync()
@@ -31,6 +26,11 @@ public class RaritiesService
 
     public void CreateRarities()
     {
+        if (_rarityCollection.CountDocuments(c => true) != 0)
+        {
+            return;
+        }
+
         foreach (var path in new[] { "metadata.json" })
         {
             using (var file = new StreamReader(path))

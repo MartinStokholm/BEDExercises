@@ -26,12 +26,7 @@ public class CardsService
         _classCollection = database.GetCollection<Class>(mongoDbSettings.Value.ClassCollectionName);
         _rarityCollection = database.GetCollection<Rarity>(mongoDbSettings.Value.RarityCollectionName);
         _setCollection = database.GetCollection<Set>(mongoDbSettings.Value.SetCollectionName);
-        
-        if (_cardCollection.CountDocuments(c => true) == 0)
-        {
-            CreateCards();
-        }
-        
+                
     }    
     public async Task<List<CardWithMetaDataDto>> GetCardsByQueryAsync(QueryParams queryParams)
     {
@@ -67,6 +62,11 @@ public class CardsService
     }
     public void CreateCards()
     {
+        if (_cardCollection.CountDocuments(c => true) != 0)
+        {
+            return;
+        }
+        
         foreach (var path in new[] { "cards.json" })
         {
             using (var file = new StreamReader(path))

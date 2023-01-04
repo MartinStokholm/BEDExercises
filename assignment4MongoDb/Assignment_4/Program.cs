@@ -28,6 +28,23 @@ builder.Host.ConfigureLogging(logging =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var seedCardData = services.GetRequiredService<CardsService>();
+    var seedTypeData = services.GetRequiredService<TypesService>();
+    var seedRarityData = services.GetRequiredService<RaritiesService>();
+    var seedSetData = services.GetRequiredService<SetsService>();
+    var seedClassData = services.GetRequiredService<ClassesService>();
+
+    seedTypeData.CreateTypes();
+    seedRarityData.CreateRarities();
+    seedSetData.CreateSets();
+    seedClassData.CreateClasses();
+    seedCardData.CreateCards();
+    
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

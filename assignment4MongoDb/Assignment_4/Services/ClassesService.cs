@@ -17,10 +17,6 @@ public class ClassesService
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _classCollection = database.GetCollection<Class>(mongoDbSettings.Value.ClassCollectionName);
 
-        if (_classCollection.CountDocuments(c => true) == 0)
-        {
-            CreateClasses();
-        }
     }
 
     public async Task<List<Class>> GetAsync()
@@ -35,6 +31,11 @@ public class ClassesService
 
     public void CreateClasses()
     {
+        if (_classCollection.CountDocuments(c => true) != 0)
+        {
+            return;
+        }
+        
         foreach (var path in new[] { "metadata.json" })
         {
             using (var file = new StreamReader(path))
