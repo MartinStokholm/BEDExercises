@@ -11,12 +11,10 @@ builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
 
 builder.Services.AddSingleton<TypesService>();
-builder.Services.AddSingleton<ClassesService>();
 builder.Services.AddSingleton<RaritiesService>();
 builder.Services.AddSingleton<SetsService>();
+builder.Services.AddSingleton<ClassesService>();
 builder.Services.AddSingleton<CardsService>();
-
-
 
 builder.Services.AddControllers();
 
@@ -31,16 +29,20 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var seedCardData = services.GetRequiredService<CardsService>();
+    
     var seedTypeData = services.GetRequiredService<TypesService>();
-    var seedRarityData = services.GetRequiredService<RaritiesService>();
-    var seedSetData = services.GetRequiredService<SetsService>();
-    var seedClassData = services.GetRequiredService<ClassesService>();
-
     seedTypeData.CreateTypes();
+
+    var seedRarityData = services.GetRequiredService<RaritiesService>();
     seedRarityData.CreateRarities();
+
+    var seedSetData = services.GetRequiredService<SetsService>();
     seedSetData.CreateSets();
+
+    var seedClassData = services.GetRequiredService<ClassesService>();
     seedClassData.CreateClasses();
+
+    var seedCardData = services.GetRequiredService<CardsService>();
     seedCardData.CreateCards();
     
 }
@@ -53,8 +55,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-//app.UseHttpLogging();
 
 app.UseStaticFiles();
 
