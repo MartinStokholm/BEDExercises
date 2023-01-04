@@ -4,6 +4,7 @@ using Assignment_4.Models;
 using Assignment_4.Models.Dto;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.VisualBasic;
 
 namespace Assignment_4.Services;
 
@@ -12,19 +13,20 @@ public class CardsService
     private readonly IMongoCollection<Card> _cardCollection;
     private readonly IMongoCollection<Class> _classCollection;
     private readonly IMongoCollection<Set> _setCollection;
-    private readonly IMongoCollection<Types> _cardTypeCollection;
+    private readonly IMongoCollection<Types> _typesCollection;
     private readonly IMongoCollection<Rarity> _rarityCollection;
 
     public CardsService(IOptions<MongoDbSettings> mongoDbSettings)
     {
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
-        _cardCollection = database.GetCollection<Card>("CardCollection");
-        _classCollection = database.GetCollection<Class>("ClassCollection");
-        _setCollection = database.GetCollection<Set>("SetCollection");
-        _cardTypeCollection = database.GetCollection<Types>("CardTypeCollection");
-        _rarityCollection = database.GetCollection<Rarity>("RarityCollection");
-
+        
+        _cardCollection = database.GetCollection<Card>(mongoDbSettings.Value.CardCollectionName);
+        _typesCollection = database.GetCollection<Types>(mongoDbSettings.Value.CardTypeCollectionName);
+        _classCollection = database.GetCollection<Class>(mongoDbSettings.Value.ClassCollectionName);
+        _rarityCollection = database.GetCollection<Rarity>(mongoDbSettings.Value.RarityCollectionName);
+        _setCollection = database.GetCollection<Set>(mongoDbSettings.Value.SetCollectionName);
+        
         if (_cardCollection.CountDocuments(c => true) == 0)
         {
             CreateCards();
@@ -117,16 +119,21 @@ public class CardsService
                 Class = (from c in _classCollection.AsQueryable()
                          where c.Id == card.ClassId
                          select c.Name).FirstOrDefault(),
-                Type = (from t in _cardTypeCollection.AsQueryable()
+                
+                Type = (from t in _typesCollection.AsQueryable()
                         where t.Id == card.TypeId
                         select t.Name).FirstOrDefault(),
+                
                 Set = (from s in _setCollection.AsQueryable()
                        where s.Id == card.SetId
                        select s.Name).FirstOrDefault(),
+                
                 SpellSchoolId = card.SpellSchoolId,
+                
                 Rarity = (from r in _rarityCollection.AsQueryable()
                           where r.Id == card.RarityId
                           select r.Name).FirstOrDefault(),
+                
                 Health = card.Health,
                 Attack = card.Attack,
                 ManaCost = card.ManaCost,

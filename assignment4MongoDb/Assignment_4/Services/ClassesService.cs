@@ -15,8 +15,8 @@ public class ClassesService
     {
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
-        _classCollection = database.GetCollection<Class>("ClassCollection");
-        
+        _classCollection = database.GetCollection<Class>(mongoDbSettings.Value.ClassCollectionName);
+
         if (_classCollection.CountDocuments(c => true) == 0)
         {
             CreateClasses();

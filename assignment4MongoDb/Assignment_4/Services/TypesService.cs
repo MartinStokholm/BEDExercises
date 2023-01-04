@@ -17,7 +17,7 @@ public class TypesService
 
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
-        _typesCollection = database.GetCollection<Types>("CardTypeCollection");
+        _typesCollection = database.GetCollection<Types>(mongoDbSettings.Value.CardTypeCollectionName);
 
         if (_typesCollection.CountDocuments(c => true) == 0)
         {

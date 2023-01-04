@@ -15,7 +15,7 @@ public class RaritiesService
     {
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
-        _rarityCollection = database.GetCollection<Rarity>("RarityCollection");
+        _rarityCollection = database.GetCollection<Rarity>(mongoDbSettings.Value.RarityCollectionName);
 
         if (_rarityCollection.CountDocuments(c => true) == 0)
         {

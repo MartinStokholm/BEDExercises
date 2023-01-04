@@ -7,10 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//var connectionString = builder.Configuration["ConnectionString"];
 builder.Services.Configure<MongoDbSettings>(
-    builder.Configuration.GetSection("MongoDb"));
+    builder.Configuration.GetSection("MongoDbSettings"));
 
 builder.Services.AddSingleton<TypesService>();
 builder.Services.AddSingleton<ClassesService>();
