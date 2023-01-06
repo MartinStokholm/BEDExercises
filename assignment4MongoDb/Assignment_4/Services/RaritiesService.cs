@@ -1,10 +1,8 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoDB.Bson;
-using Microsoft.AspNetCore.Mvc;
 using Assignment_4.Models;
 using System.Text.Json;
-//using Assignment_4.Models.Dto;
+
 namespace Assignment_4.Services;
 
 public class RaritiesService
@@ -16,7 +14,6 @@ public class RaritiesService
         MongoClient client = new MongoClient(mongoDbSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _rarityCollection = database.GetCollection<Rarity>(mongoDbSettings.Value.RarityCollectionName);
-
     }
 
     public async Task<List<Rarity>> GetAsync()
