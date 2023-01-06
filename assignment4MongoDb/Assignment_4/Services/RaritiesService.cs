@@ -23,6 +23,9 @@ public class RaritiesService
 
     public void CreateRarities()
     {
+        if (_rarityCollection.Find(r => true).Any())
+            return;
+        
         foreach (var path in new[] { "metadata.json" })
         {
             using var file = new StreamReader(path);

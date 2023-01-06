@@ -22,6 +22,9 @@ public class TypesService
 
     public void CreateTypes()
     {
+        if (_typesCollection.Find(c => true).Any())
+            return;
+
         foreach (var path in new[] { "metadata.json" })
         {
             using var file = new StreamReader(path);

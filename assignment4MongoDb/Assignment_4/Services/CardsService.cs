@@ -60,6 +60,9 @@ public class CardsService
     }
     public void CreateCards()
     {
+        if (_cardCollection.Find(c => true).Any())
+            return;
+        
         foreach (var path in new[] { "cards.json" })
         {
             using var file = new StreamReader(path);

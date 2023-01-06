@@ -28,6 +28,9 @@ public class ClassesService
 
     public void CreateClasses()
     {
+        if (_classCollection.Find(c => true).Any())
+            return;
+        
         foreach (var path in new[] { "metadata.json" })
         {
             using var file = new StreamReader(path);

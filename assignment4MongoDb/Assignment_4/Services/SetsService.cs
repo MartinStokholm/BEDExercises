@@ -28,6 +28,9 @@ public class SetsService
 
     public void CreateSets()
     {
+        if (_setCollection.Find(c => true).Any())
+            return;
+        
         foreach (var path in new[] { "metadata.json" })
         {
             using var file = new StreamReader(path);
