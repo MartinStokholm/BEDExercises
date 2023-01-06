@@ -74,32 +74,7 @@ public class CardsService
    
     // joins the card with the metadata by id and returns a list of cards with strings instead of ids
     public List<CardWithMetaDataDto> JoinCardsWithMetaData(List<Card> cards)
-    {
-        //var query = from card in cards
-        //            join classType in _classCollection.AsQueryable() on card.ClassId equals classType.Id
-        //            join cardType in _cardTypeCollection.AsQueryable() on card.TypeId equals cardType.Id
-        //            join rarity in _rarityCollection.AsQueryable() on card.RarityId equals rarity.Id
-        //            join set in _setCollection.AsQueryable() on card.SetId equals set.Id
-                   
-        //            select new CardWithMetaDataDto
-        //            {
-        //                Id = card.Id,
-        //                Name = card.Name,
-        //                Type = cardType.Name,
-        //                Class = classType.Name,
-        //                Set = set.Name,
-                        
-        //                Rarity = rarity.Name,
-        //                Health = card.Health,
-        //                Attack = card.Attack,
-        //                ManaCost = card.ManaCost,
-        //                Artist = card.Artist,
-        //                Text = card.Text,
-        //                FlavorText = card.FlavorText,
-        //            };
-
-        //return query.ToList();
-        
+    {        
         var result = new List<CardWithMetaDataDto>();
 
         foreach (var card in cards)
